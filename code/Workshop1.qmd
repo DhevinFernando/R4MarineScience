@@ -112,7 +112,7 @@ summary(penguins)
 
 ```
 
-### 1.7  Foundational grammar
+### 1.7 Foundational grammar
 
 Slicing
 

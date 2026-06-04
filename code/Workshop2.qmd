@@ -1,0 +1,119 @@
+---
+title: "Workshop2Module 2"
+author: "Dhevin Fernando"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## 2.2 Tidying data
+
+Loading tidyverse
+
+```{r}
+library(tidyverse)
+```
+
+## 2.4 Lengthening datasets
+
+```{r}
+billboard
+billboard |> 
+  pivot_longer(
+    cols = starts_with("wk"), 
+    names_to = "week", 
+    values_to = "rank"
+  )
+#remove the NA values
+billboard |> 
+  pivot_longer(
+    cols = starts_with("wk"), 
+    names_to = "week", 
+    values_to = "rank",
+    values_drop_na = TRUE
+  )
+
+#converting values within week variable from string to numbers
+billboard_longer <- billboard |> 
+  pivot_longer(
+    cols = starts_with("wk"), 
+    names_to = "week", 
+    values_to = "rank",
+    values_drop_na = TRUE
+  ) |> 
+  mutate(
+    week = parse_number(week)
+  )
+billboard_longer
+
+```
+
+```{r}
+df <- tribble(
+  ~id,  ~bp1, ~bp2,
+   "A",  100,  120,
+   "B",  140,  115,
+   "C",  120,  125
+)
+
+df |> 
+  pivot_longer(
+    cols = bp1:bp2, 
+    names_to = "measurement", 
+    values_to = "value"
+  )|> 
+  mutate(
+    measurement = parse_number(measurement)
+  )
+```
+
+## 2.5 Widening datasets
+
+```{r}
+cms_patient_experience
+cms_patient_experience |> 
+  distinct(measure_cd, measure_title)
+cms_patient_experience |> 
+  pivot_wider(
+    names_from = measure_cd,
+    values_from = prf_rate
+  )
+cms_patient_experience |> 
+  pivot_wider(
+    id_cols = starts_with("org"),
+    names_from = measure_cd,
+    values_from = prf_rate
+  )
+
+```
+
+```{r}
+df <- tribble(
+  ~id, ~measurement, ~value,
+  "A",        "bp1",    100,
+  "B",        "bp1",    140,
+  "B",        "bp2",    115, 
+  "A",        "bp2",    120,
+  "A",        "bp3",    105
+)
+df |> 
+  pivot_wider(
+    names_from = measurement,
+    values_from = value
+  )
+df |> 
+  distinct(measurement) |> 
+  pull()
+df |> 
+  select(-measurement, -value) |> 
+  distinct()
+df |> 
+  select(-measurement, -value) |> 
+  distinct() |> 
+  mutate(x = NA, y = NA, z = NA)
+
+
+```
