@@ -370,5 +370,6 @@ sensor_log <- tibble(
 # Remove any row where salinity is missing
 clean_log <- sensor_log |>
   drop_na(salinity)
+
 clean_log
 ```
