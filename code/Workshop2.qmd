@@ -373,3 +373,37 @@ clean_log <- sensor_log |>
 
 clean_log
 ```
+
+Exercise 1:
+
+```{r}
+# Make sure packages are loaded
+library(tidyverse)
+library(palmerpenguins)
+
+# The messy metadata provided by your colleague
+island_metadata <- tibble(
+  island_name = c(" biscoe", "Dream ", "Torgersen"),
+  station_install = c("15/01/2003", "22-03-2004", "05/11/2001"),
+  latitude = c(-64.81, -64.73, -64.76)
+)
+penguins
+print(island_metadata)
+
+# Using stringr within mutate to standardize the text
+clean_metadata <- island_metadata |>
+  mutate(
+    # 1. Convert everything to Title case
+    island_name = str_to_title(island_name),
+    # 3. Trim any leading or trailing whitespace (invisible spaces at the ends)
+    island_name = str_trim(island_name),
+    # 2. Replace any spaces with underscores
+    island_name = str_replace_all(island_name, pattern = " ", replacement = "_"),
+    #convert dates to true dates with lubridate
+    station_install = dmy(station_install)
+  )
+
+print(clean_metadata)
+
+
+```
