@@ -271,6 +271,8 @@ site_metadata <- tibble(
   zone = c("Marine National Park", "Conservation Park", "Habitat Protection", "General Use", "Other Use"),
   lat = c(-19.16, -19.15, -19.14, -19.12, -19.11)
 )
+observations
+site_metadata
 
 # Joining metadata to our observations
 joined_data <- observations |>
@@ -496,3 +498,239 @@ Because this is an open-ended task, there is no single "correct" way to approach
 1.  **Utilise the tidyverse:** There are many ways of wrangling data, but here we are looking for you to use your growing skills in dplyr, tidyr, stringr, and lubridate functions linked by the pipe (\|\> or %\>%).
 
 -   **Reproducible workflow:** Make sure you stay on top of your PC → Git → GitHub lifecycle, by utilising: save, commit, pull, push!
+
+Load Packages
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(readxl)
+```
+
+Load estuary_catch_log.xlsx (main dataset)
+
+```{r}
+catch_log1 <- read_excel(here::here("data/estuary_catch_log.xlsx"), sheet = "Lower_ross")
+catch_log2 <- read_excel(here::here("data/estuary_catch_log.xlsx"), sheet = "Mid_Ross ")
+catch_log3 <- read_excel(here::here("data/estuary_catch_log.xlsx"), sheet = "ROSS MOUTH")
+catch_log4 <- read_excel(here::here("data/estuary_catch_log.xlsx"), sheet = "Upper Ross")
+
+catch_log1
+catch_log2
+catch_log3
+catch_log4
+```
+
+Bind the dataframes together
+
+prompt used: how do i bind the following dataframes together, ensuring they share the same fields and columns
+
+```{r}
+combined_catch_log <- bind_rows(catch_log1, catch_log2, catch_log3, catch_log4)
+combined_catch_log
+
+#check how many species and sites are present
+combined_catch_log |> 
+  distinct(site)
+
+combined_catch_log |> 
+  distinct(species)
+
+#clear unnecessary data from workspace
+rm(catch_log1, catch_log2, catch_log3, catch_log4)
+```
+
+Standardise site and species names and converting dates from strings to date-time
+
+```{r}
+# Using stringr within mutate to standardize the text
+catch_clean <- combined_catch_log |>
+  mutate(
+    # 1. Convert everything to lower case for site name
+    site = str_to_lower(site),
+    # 2. Trim any leading or trailing whitespace (invisible spaces at the ends) for site name
+    site = str_trim(site),
+    # 3. Replace any spaces with underscores site name
+    site = str_replace_all(site, pattern = " ", replacement = "_"),
+    # 1. Convert everything to lower case for species
+    species = str_to_lower(species),
+    # 2. Trim any leading or trailing whitespace (invisible spaces at the ends) for species
+    species = str_trim(species),
+    # 3. Replace any spaces with underscores for species
+    species = str_replace_all(species, pattern = " ", replacement = "_"),
+     #convert dates to true dates with lubridate
+    date = ymd(date)
+  ) |>  # Convert all chr to fct
+  mutate(across(where(is.character), as_factor)
+  )
+
+print(catch_clean)
+
+#using distinct to check species again
+
+catch_clean |> 
+  distinct(site)
+
+catch_clean |> 
+  distinct(species)
+```
+
+Load metadata
+
+```{r}
+estuary_metadata <- read_csv(here::here("data/estuary_metadata.csv"))
+sonde_data <- read_csv(here::here("data/estuary_sonde_data.csv"))
+species_dictionary <- read_csv(here::here("data/species_dictionary.csv"))
+```
+
+standardise metadata
+
+```{r}
+# Using stringr within mutate to standardize the text
+estuary_metadata_clean <- estuary_metadata |>
+  mutate(
+    # 1. Convert everything to lower case for site name
+    site_name = str_to_lower(site_name),
+    # 2. Trim any leading or trailing whitespace (invisible spaces at the ends) for site name
+    site_name = str_trim(site_name),
+    # 3. Replace any spaces with underscores site name
+    site_name = str_replace_all(site_name, pattern = " ", replacement = "_")
+    
+  ) |>  # Convert all chr to fct
+  mutate(across(where(is.character), as_factor)
+  )
+estuary_metadata_clean
+```
+
+Fix dates in sonde and fix NA values
+
+```{r}
+sonde_data
+# Convert the -999 error codes to true NA values
+fixed_sonde <- sonde_data |>
+  mutate(turbidity = na_if(turbidity, -999.0),
+         timestamp = dmy_hm(timestamp),
+         salinity = ifelse(salinity < 0, NA, salinity)#convert negatuve salinity to NA
+         ) |>  # Convert all chr to fct
+  mutate(across(where(is.character), as_factor)
+  )
+
+print(fixed_sonde)
+
+```
+
+fix species dictionary
+
+```{r}
+species_dictionary
+fixed_species <- species_dictionary |>
+  mutate(
+    # 1. Convert everything to lower case for site name
+    common_name = str_to_lower(common_name),
+    # 2. Trim any leading or trailing whitespace (invisible spaces at the ends) for site name
+    common_name = str_trim(common_name),
+    # 3. Replace any spaces with underscores site name
+    common_name = str_replace_all(common_name, pattern = " ", replacement = "_")
+    
+  ) |>  # Convert all chr to fct
+  mutate(across(where(is.character), as_factor)
+  )
+fixed_species
+
+
+```
+
+Phase 2:
+
+summarise sensor data (note that you might need to change the posixct variable type across the board
+
+```{r}
+daily_sonde_summary <- fixed_sonde |>
+  mutate(
+    date = as_date(floor_date(timestamp, "day")) #round timestaps to days and set it to date format
+  ) |>
+  group_by(site, date) |>
+  summarize(
+    mean_temperature = mean(temperature, na.rm = TRUE),
+    mean_salinity = mean(salinity, na.rm = TRUE),
+     mean_turbidity = mean(turbidity, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+daily_sonde_summary
+
+```
+
+merge species_dictionary with main data
+
+```{r}
+merge_catch <- catch_clean |>
+  left_join(fixed_species, by = join_by(species == common_name)) |>
+  rename(common_name = species) #rename the column containing common names previously named "species" to an appropriate heading
+
+
+print(merge_catch)
+
+```
+
+merge with sensor data and spatial data
+
+```{r}
+full_merge_catch <- merge_catch |>
+  left_join(estuary_metadata_clean, by = join_by(site == site_name)) |>
+  left_join(daily_sonde_summary, by = join_by(site, date))
+full_merge_catch
+```
+
+Phase 3: Zero data framework
+
+Use tidyr::complete() to build a zero-data framework. Ensure that every species is represented at every site, on every sampling day.
+
+-   Replace the resulting NA values in the catch column with 0 using coalesce().
+
+```{r}
+# Force inclusion of hidden zero-catch data
+finalised_catch <- full_merge_catch |>
+  complete(
+    nesting( site, date, 
+            lat, lon, 
+            zone, mean_temperature, mean_salinity, mean_turbidity),
+    scientific_name)|>
+  mutate(
+    # Convert the resulting NA counts to 0
+    count = coalesce(count, 0)
+  )
+
+print(finalised_catch)
+
+catch_data_final <- 
+catch_data_final |> 
+  complete(
+    nesting(site, date, 
+           # lat, lon, 
+            zone, mean_temp, mean_salinity, mean_turbidity),
+    scientific_name
+  ) |>
+  mutate(
+    # Convert the resulting NA counts to 0
+    count = coalesce(count, 0)
+  )
+
+#prompt solution
+#finalised_catch <- full_merge_catch %>%
+#  complete(
+ #   site,
+ #   date,
+ #   scientific_name, # Use the comprehensive list of species
+  #  fill = list(count = 0) # Fill the 'count' column with 0 for missing combinations
+ # ) %>%
+  # For environmental columns (zone, mean_temp, mean_salinity, mean_turbidity)
+  # which are associated with 'site' and 'date', we want to propagate their values
+  # for newly created rows that share the same site and date.
+  # This assumes these environmental values are consistent for a given site-date.
+ # group_by(site, date) %>%
+ # fill(zone, mean_temperature, mean_salinity, mean_turbidity, .direction = "downup") %>%
+ # ungroup() 
+#finalised_catch
+```
