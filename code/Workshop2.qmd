@@ -704,19 +704,6 @@ finalised_catch <- full_merge_catch |>
 
 print(finalised_catch)
 
-catch_data_final <- 
-catch_data_final |> 
-  complete(
-    nesting(site, date, 
-           # lat, lon, 
-            zone, mean_temp, mean_salinity, mean_turbidity),
-    scientific_name
-  ) |>
-  mutate(
-    # Convert the resulting NA counts to 0
-    count = coalesce(count, 0)
-  )
-
 #prompt solution
 #finalised_catch <- full_merge_catch %>%
 #  complete(
@@ -733,4 +720,149 @@ catch_data_final |>
  # fill(zone, mean_temperature, mean_salinity, mean_turbidity, .direction = "downup") %>%
  # ungroup() 
 #finalised_catch
+```
+
+**Phase 4: Statistical Extraction** From your master dataset, generate a clean summary table showing the mean ± standard error of both the fish catch and the salinity for each scientific species across each estuary zone.
+
+Salinity summary table:
+
+```{r}
+#create a summary table showing the mean ± standard error of salinity for each estuary zone using the finalised_catch dataset
+salinity_summary_table <- finalised_catch |>
+  group_by(zone) |>
+  summarise(
+    median_salinity = median(mean_salinity, na.rm = TRUE),
+    se_salinity = sd(mean_salinity, na.rm = TRUE) / sqrt(n()),
+    .groups = "drop"
+  )
+print(salinity_summary_table)
+
+#| fig-cap: "This figure shows the Salinity Gradient across zones at the Ross River Estuary System at Townsville, NQ, Australia during May of 2026."
+#create a bar graph showing the median salinity for each zone with error bars representing the standard error
+ggplot(salinity_summary_table, aes(x = zone, y = median_salinity)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  geom_errorbar(aes(ymin = median_salinity - se_salinity, 
+                    ymax = median_salinity + se_salinity), 
+                width = 0.2) +
+  labs(title = "Median Salinity by Estuary Zone",
+       subtitle = "Error bars represent standard error",
+       y = "Median Salinity (ppt)",
+       x = "Estuary Zone") +
+  theme_minimal()
+
+```
+
+Turbidity summary table:
+
+```{r}
+#create a summary table showing the mean ± standard error of turbidity for each estuary zone using the finalised_catch dataset
+turbidity_summary_table <- finalised_catch |>
+  group_by(zone) |>
+  summarise(
+    median_turbidity = median(mean_turbidity, na.rm = TRUE),
+    se_turbidity = sd(mean_turbidity, na.rm = TRUE) / sqrt(n()),
+    .groups = "drop"
+  )
+turbidity_summary_table
+
+#create a bar graph showing the median turbidity for each zone with error bars representing the standard error
+turbidity_summary_table|> ggplot(aes(x = zone, y = median_turbidity)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  geom_errorbar(aes(ymin = median_turbidity - se_turbidity, 
+                    ymax = median_turbidity + se_turbidity), 
+                width = 0.2) +
+  labs(title = "Median Turbidity by Estuary Zone",
+       subtitle = "Error bars represent standard error",
+       y = "Median Turbidity (NTU)",
+       x = "Estuary Zone") +
+  theme_minimal()
+```
+
+Temperature summary table:
+
+```{r}
+#create a summary table showing the mean ± standard error of temperature for each estuary zone using the finalised_catch dataset
+temp_summary_table <- finalised_catch |>
+  group_by(zone) |>
+  summarise(
+    median_temperature = median(mean_temperature, na.rm = TRUE),
+    se_temperature = sd(mean_temperature, na.rm = TRUE) / sqrt(n()),
+    .groups = "drop"
+  )
+temp_summary_table
+
+#create a bar graph showing the median temperature for each zone with error bars representing the standard error
+temp_summary_table|> ggplot(aes(x = zone, y = median_temperature)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  geom_errorbar(aes(ymin = median_temperature - se_temperature, 
+                    ymax = median_temperature + se_temperature), 
+                width = 0.2) +
+  labs(title = "Median Temperature by Estuary Zone",
+       subtitle = "Error bars represent standard error",
+       y = "Median Temperature (°C)",
+       x = "Estuary Zone") +
+  theme_minimal()
+```
+
+This is my attempt to plot fish abundance with salinity as there are notable differences between the salinities at each estuary zone:
+
+```{r}
+#create a summary table for fish catch showing the mean ± standard error of fish catch for each scientific species across each estuary zone using the finalised_catch dataset
+fish_summary_table <- finalised_catch |>
+  group_by(scientific_name, zone) |>
+  summarise(
+    mean_count = mean(count, na.rm = TRUE),
+    se_count = sd(count, na.rm = TRUE) / sqrt(n()),
+    .groups = "drop"
+  )
+print(fish_summary_table)
+
+#my plot attempt
+
+#plot mean fish count as a line graph for each scientific species across each estuary zone with error bars representing the standard error, faceted by species. The plot will also include jittered data points for count from the finalised_catch dataset, with points coloured by zone and sized by mean salinity. The lines, points and error bars for mean_count will be rendered in black to ensure they are visible against the coloured points representing the raw data.
+ggplot(fish_summary_table, aes(x = zone, y = mean_count, fill= zone, group = scientific_name)) +
+  geom_line(color = "black") +
+  geom_point(data = finalised_catch, aes(x = zone, y = count, colour = zone, size = mean_salinity), position = position_jitter(width = 0.2), alpha = 0.2) + geom_point(position = "dodge", size = 4, pch = 23) +
+  geom_errorbar(aes(ymin = mean_count - se_count, ymax = mean_count + se_count), width = 0.2, color = "black") +
+  facet_wrap(~ scientific_name) +
+  labs(title = "Predatory Fish Abundance across Estuarine Salinity Gradients",
+       subtitle = "Ross River Estuary System, May 2026",
+       y = "Abundance (per day)",
+       x = "Spatial Zone") +
+  theme_minimal() +
+  theme(legend.position = "right")
+
+
+
+```
+
+Based on lecturer plot instructions this is what the plot would look like:
+
+```{r}
+#based off bens plot
+fish_summary_table |> 
+  ggplot(aes(x = zone, y = mean_count, fill = zone)) +
+  geom_line(group = 1) +
+  # add in points from master data
+  geom_point(data = finalised_catch, aes(x = zone, y = count), 
+             position = position_jitter(width = 0.2), alpha = 0.2, size = 1, inherit.aes = FALSE) +
+  geom_point(position = "dodge", size = 4, pch = 23) +
+  
+  geom_errorbar(aes(ymin = mean_count - se_count, ymax = mean_count + se_count), 
+                position = position_dodge(0.9), width = 0.2) +
+  
+  facet_wrap(~ scientific_name, scales = "fixed") +
+  theme_minimal() +
+  theme(
+    strip.text = element_text(face = "italic", size = 10, colour = "grey20"),
+   # legend.position = "bottom"
+    legend.position = "none"
+  ) +
+  labs(
+    #title = "Predatory Fish Abundance across Estuarine Salinity Gradients",
+    #subtitle = "Ross River Estuary System, May 2026",
+    x = "Spatial Zone",
+    y = "Abundance (per day)",
+    fill = "Spatial Zone"
+  )
 ```
