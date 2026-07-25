@@ -1,0 +1,2200 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dhevin Fernando">
+
+<title>Workshop 2 Module 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Workshop2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Workshop2_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="Workshop2_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="Workshop2_files/libs/quarto-html/popper.min.js"></script>
+<script src="Workshop2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Workshop2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Workshop2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Workshop2_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Workshop2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Workshop2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Workshop2_files/libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Workshop 2 Module 2</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dhevin Fernando </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="tidying-data" class="level2">
+<h2 class="anchored" data-anchor-id="tidying-data">2.2 Tidying data</h2>
+<p>Loading tidyverse</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyverse' was built under R version 4.5.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.5.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'forcats' was built under R version 4.5.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'lubridate' was built under R version 4.5.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.0
+✔ lubridate 1.9.5     ✔ tidyr     1.3.1
+✔ purrr     1.1.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+</section>
+<section id="lengthening-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="lengthening-datasets">2.4 Lengthening datasets</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>billboard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 317 × 79
+   artist     track date.entered   wk1   wk2   wk3   wk4   wk5   wk6   wk7   wk8
+   &lt;chr&gt;      &lt;chr&gt; &lt;date&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 2 Pac      Baby… 2000-02-26      87    82    72    77    87    94    99    NA
+ 2 2Ge+her    The … 2000-09-02      91    87    92    NA    NA    NA    NA    NA
+ 3 3 Doors D… Kryp… 2000-04-08      81    70    68    67    66    57    54    53
+ 4 3 Doors D… Loser 2000-10-21      76    76    72    69    67    65    55    59
+ 5 504 Boyz   Wobb… 2000-04-15      57    34    25    17    17    31    36    49
+ 6 98^0       Give… 2000-08-19      51    39    34    26    26    19     2     2
+ 7 A*Teens    Danc… 2000-07-08      97    97    96    95   100    NA    NA    NA
+ 8 Aaliyah    I Do… 2000-01-29      84    62    51    41    38    35    35    38
+ 9 Aaliyah    Try … 2000-03-18      59    53    38    28    21    18    16    14
+10 Adams, Yo… Open… 2000-08-26      76    76    74    69    68    67    61    58
+# ℹ 307 more rows
+# ℹ 68 more variables: wk9 &lt;dbl&gt;, wk10 &lt;dbl&gt;, wk11 &lt;dbl&gt;, wk12 &lt;dbl&gt;,
+#   wk13 &lt;dbl&gt;, wk14 &lt;dbl&gt;, wk15 &lt;dbl&gt;, wk16 &lt;dbl&gt;, wk17 &lt;dbl&gt;, wk18 &lt;dbl&gt;,
+#   wk19 &lt;dbl&gt;, wk20 &lt;dbl&gt;, wk21 &lt;dbl&gt;, wk22 &lt;dbl&gt;, wk23 &lt;dbl&gt;, wk24 &lt;dbl&gt;,
+#   wk25 &lt;dbl&gt;, wk26 &lt;dbl&gt;, wk27 &lt;dbl&gt;, wk28 &lt;dbl&gt;, wk29 &lt;dbl&gt;, wk30 &lt;dbl&gt;,
+#   wk31 &lt;dbl&gt;, wk32 &lt;dbl&gt;, wk33 &lt;dbl&gt;, wk34 &lt;dbl&gt;, wk35 &lt;dbl&gt;, wk36 &lt;dbl&gt;,
+#   wk37 &lt;dbl&gt;, wk38 &lt;dbl&gt;, wk39 &lt;dbl&gt;, wk40 &lt;dbl&gt;, wk41 &lt;dbl&gt;, wk42 &lt;dbl&gt;, …</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>billboard <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"wk"</span>), </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"week"</span>, </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"rank"</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 24,092 × 5
+   artist track                   date.entered week   rank
+   &lt;chr&gt;  &lt;chr&gt;                   &lt;date&gt;       &lt;chr&gt; &lt;dbl&gt;
+ 1 2 Pac  Baby Don't Cry (Keep... 2000-02-26   wk1      87
+ 2 2 Pac  Baby Don't Cry (Keep... 2000-02-26   wk2      82
+ 3 2 Pac  Baby Don't Cry (Keep... 2000-02-26   wk3      72
+ 4 2 Pac  Baby Don't Cry (Keep... 2000-02-26   wk4      77
+ 5 2 Pac  Baby Don't Cry (Keep... 2000-02-26   wk5      87
+ 6 2 Pac  Baby Don't Cry (Keep... 2000-02-26   wk6      94
+ 7 2 Pac  Baby Don't Cry (Keep... 2000-02-26   wk7      99
+ 8 2 Pac  Baby Don't Cry (Keep... 2000-02-26   wk8      NA
+ 9 2 Pac  Baby Don't Cry (Keep... 2000-02-26   wk9      NA
+10 2 Pac  Baby Don't Cry (Keep... 2000-02-26   wk10     NA
+# ℹ 24,082 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#remove the NA values</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>billboard <span class="sc">|&gt;</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"wk"</span>), </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"week"</span>, </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"rank"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5,307 × 5
+   artist  track                   date.entered week   rank
+   &lt;chr&gt;   &lt;chr&gt;                   &lt;date&gt;       &lt;chr&gt; &lt;dbl&gt;
+ 1 2 Pac   Baby Don't Cry (Keep... 2000-02-26   wk1      87
+ 2 2 Pac   Baby Don't Cry (Keep... 2000-02-26   wk2      82
+ 3 2 Pac   Baby Don't Cry (Keep... 2000-02-26   wk3      72
+ 4 2 Pac   Baby Don't Cry (Keep... 2000-02-26   wk4      77
+ 5 2 Pac   Baby Don't Cry (Keep... 2000-02-26   wk5      87
+ 6 2 Pac   Baby Don't Cry (Keep... 2000-02-26   wk6      94
+ 7 2 Pac   Baby Don't Cry (Keep... 2000-02-26   wk7      99
+ 8 2Ge+her The Hardest Part Of ... 2000-09-02   wk1      91
+ 9 2Ge+her The Hardest Part Of ... 2000-09-02   wk2      87
+10 2Ge+her The Hardest Part Of ... 2000-09-02   wk3      92
+# ℹ 5,297 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#converting values within week variable from string to numbers</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>billboard_longer <span class="ot">&lt;-</span> billboard <span class="sc">|&gt;</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"wk"</span>), </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"week"</span>, </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"rank"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">week =</span> <span class="fu">parse_number</span>(week)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>billboard_longer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5,307 × 5
+   artist  track                   date.entered  week  rank
+   &lt;chr&gt;   &lt;chr&gt;                   &lt;date&gt;       &lt;dbl&gt; &lt;dbl&gt;
+ 1 2 Pac   Baby Don't Cry (Keep... 2000-02-26       1    87
+ 2 2 Pac   Baby Don't Cry (Keep... 2000-02-26       2    82
+ 3 2 Pac   Baby Don't Cry (Keep... 2000-02-26       3    72
+ 4 2 Pac   Baby Don't Cry (Keep... 2000-02-26       4    77
+ 5 2 Pac   Baby Don't Cry (Keep... 2000-02-26       5    87
+ 6 2 Pac   Baby Don't Cry (Keep... 2000-02-26       6    94
+ 7 2 Pac   Baby Don't Cry (Keep... 2000-02-26       7    99
+ 8 2Ge+her The Hardest Part Of ... 2000-09-02       1    91
+ 9 2Ge+her The Hardest Part Of ... 2000-09-02       2    87
+10 2Ge+her The Hardest Part Of ... 2000-09-02       3    92
+# ℹ 5,297 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>id,  <span class="sc">~</span>bp1, <span class="sc">~</span>bp2,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>   <span class="st">"A"</span>,  <span class="dv">100</span>,  <span class="dv">120</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">"B"</span>,  <span class="dv">140</span>,  <span class="dv">115</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>   <span class="st">"C"</span>,  <span class="dv">120</span>,  <span class="dv">125</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> bp1<span class="sc">:</span>bp2, </span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"measurement"</span>, </span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">|&gt;</span> </span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">measurement =</span> <span class="fu">parse_number</span>(measurement)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  id    measurement value
+  &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+1 A               1   100
+2 A               2   120
+3 B               1   140
+4 B               2   115
+5 C               1   120
+6 C               2   125</code></pre>
+</div>
+</div>
+</section>
+<section id="widening-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="widening-datasets">2.5 Widening datasets</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cms_patient_experience</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 500 × 5
+   org_pac_id org_nm                           measure_cd measure_title prf_rate
+   &lt;chr&gt;      &lt;chr&gt;                            &lt;chr&gt;      &lt;chr&gt;            &lt;dbl&gt;
+ 1 0446157747 USC CARE MEDICAL GROUP INC       CAHPS_GRP… CAHPS for MI…       63
+ 2 0446157747 USC CARE MEDICAL GROUP INC       CAHPS_GRP… CAHPS for MI…       87
+ 3 0446157747 USC CARE MEDICAL GROUP INC       CAHPS_GRP… CAHPS for MI…       86
+ 4 0446157747 USC CARE MEDICAL GROUP INC       CAHPS_GRP… CAHPS for MI…       57
+ 5 0446157747 USC CARE MEDICAL GROUP INC       CAHPS_GRP… CAHPS for MI…       85
+ 6 0446157747 USC CARE MEDICAL GROUP INC       CAHPS_GRP… CAHPS for MI…       24
+ 7 0446162697 ASSOCIATION OF UNIVERSITY PHYSI… CAHPS_GRP… CAHPS for MI…       59
+ 8 0446162697 ASSOCIATION OF UNIVERSITY PHYSI… CAHPS_GRP… CAHPS for MI…       85
+ 9 0446162697 ASSOCIATION OF UNIVERSITY PHYSI… CAHPS_GRP… CAHPS for MI…       83
+10 0446162697 ASSOCIATION OF UNIVERSITY PHYSI… CAHPS_GRP… CAHPS for MI…       63
+# ℹ 490 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>cms_patient_experience <span class="sc">|&gt;</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(measure_cd, measure_title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  measure_cd   measure_title                                                    
+  &lt;chr&gt;        &lt;chr&gt;                                                            
+1 CAHPS_GRP_1  CAHPS for MIPS SSM: Getting Timely Care, Appointments, and Infor…
+2 CAHPS_GRP_2  CAHPS for MIPS SSM: How Well Providers Communicate               
+3 CAHPS_GRP_3  CAHPS for MIPS SSM: Patient's Rating of Provider                 
+4 CAHPS_GRP_5  CAHPS for MIPS SSM: Health Promotion and Education               
+5 CAHPS_GRP_8  CAHPS for MIPS SSM: Courteous and Helpful Office Staff           
+6 CAHPS_GRP_12 CAHPS for MIPS SSM: Stewardship of Patient Resources             </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>cms_patient_experience <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> measure_cd,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> prf_rate</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 500 × 9
+   org_pac_id org_nm           measure_title CAHPS_GRP_1 CAHPS_GRP_2 CAHPS_GRP_3
+   &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;               &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+ 1 0446157747 USC CARE MEDICA… CAHPS for MI…          63          NA          NA
+ 2 0446157747 USC CARE MEDICA… CAHPS for MI…          NA          87          NA
+ 3 0446157747 USC CARE MEDICA… CAHPS for MI…          NA          NA          86
+ 4 0446157747 USC CARE MEDICA… CAHPS for MI…          NA          NA          NA
+ 5 0446157747 USC CARE MEDICA… CAHPS for MI…          NA          NA          NA
+ 6 0446157747 USC CARE MEDICA… CAHPS for MI…          NA          NA          NA
+ 7 0446162697 ASSOCIATION OF … CAHPS for MI…          59          NA          NA
+ 8 0446162697 ASSOCIATION OF … CAHPS for MI…          NA          85          NA
+ 9 0446162697 ASSOCIATION OF … CAHPS for MI…          NA          NA          83
+10 0446162697 ASSOCIATION OF … CAHPS for MI…          NA          NA          NA
+# ℹ 490 more rows
+# ℹ 3 more variables: CAHPS_GRP_5 &lt;dbl&gt;, CAHPS_GRP_8 &lt;dbl&gt;, CAHPS_GRP_12 &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>cms_patient_experience <span class="sc">|&gt;</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">id_cols =</span> <span class="fu">starts_with</span>(<span class="st">"org"</span>),</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> measure_cd,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> prf_rate</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 95 × 8
+   org_pac_id org_nm CAHPS_GRP_1 CAHPS_GRP_2 CAHPS_GRP_3 CAHPS_GRP_5 CAHPS_GRP_8
+   &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+ 1 0446157747 USC C…          63          87          86          57          85
+ 2 0446162697 ASSOC…          59          85          83          63          88
+ 3 0547164295 BEAVE…          49          NA          75          44          73
+ 4 0749333730 CAPE …          67          84          85          65          82
+ 5 0840104360 ALLIA…          66          87          87          64          87
+ 6 0840109864 REX H…          73          87          84          67          91
+ 7 0840513552 SCL H…          58          83          76          58          78
+ 8 0941545784 GRITM…          46          86          81          54          NA
+ 9 1052612785 COMMU…          65          84          80          58          87
+10 1254237779 OUR L…          61          NA          NA          65          NA
+# ℹ 85 more rows
+# ℹ 1 more variable: CAHPS_GRP_12 &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>id, <span class="sc">~</span>measurement, <span class="sc">~</span>value,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"A"</span>,        <span class="st">"bp1"</span>,    <span class="dv">100</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"B"</span>,        <span class="st">"bp1"</span>,    <span class="dv">140</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"B"</span>,        <span class="st">"bp2"</span>,    <span class="dv">115</span>, </span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"A"</span>,        <span class="st">"bp2"</span>,    <span class="dv">120</span>,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"A"</span>,        <span class="st">"bp3"</span>,    <span class="dv">105</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> measurement,</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> value</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  id      bp1   bp2   bp3
+  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 A       100   120   105
+2 B       140   115    NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(measurement) <span class="sc">|&gt;</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "bp1" "bp2" "bp3"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>measurement, <span class="sc">-</span>value) <span class="sc">|&gt;</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 1
+  id   
+  &lt;chr&gt;
+1 A    
+2 B    </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>measurement, <span class="sc">-</span>value) <span class="sc">|&gt;</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">x =</span> <span class="cn">NA</span>, <span class="at">y =</span> <span class="cn">NA</span>, <span class="at">z =</span> <span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  id    x     y     z    
+  &lt;chr&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt;
+1 A     NA    NA    NA   
+2 B     NA    NA    NA   </code></pre>
+</div>
+</div>
+</section>
+<section id="pivoting-penguins" class="level2">
+<h2 class="anchored" data-anchor-id="pivoting-penguins">2.6 Pivoting penguins</h2>
+<p>Lengthening:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'palmerpenguins' was built under R version 4.5.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'palmerpenguins'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:datasets':
+
+    penguins, penguins_raw</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>penguins</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+ 1 Adelie  Torgersen           39.1          18.7               181        3750
+ 2 Adelie  Torgersen           39.5          17.4               186        3800
+ 3 Adelie  Torgersen           40.3          18                 195        3250
+ 4 Adelie  Torgersen           NA            NA                  NA          NA
+ 5 Adelie  Torgersen           36.7          19.3               193        3450
+ 6 Adelie  Torgersen           39.3          20.6               190        3650
+ 7 Adelie  Torgersen           38.9          17.8               181        3625
+ 8 Adelie  Torgersen           39.2          19.6               195        4675
+ 9 Adelie  Torgersen           34.1          18.1               193        3475
+10 Adelie  Torgersen           42            20.2               190        4250
+# ℹ 334 more rows
+# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a long version of the penguins dataset</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>penguins_long <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g),</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"measurement_type"</span>,</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="co"># View the result</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins_long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+  species island    sex     year measurement_type   value
+  &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt; &lt;chr&gt;              &lt;dbl&gt;
+1 Adelie  Torgersen male    2007 bill_length_mm      39.1
+2 Adelie  Torgersen male    2007 bill_depth_mm       18.7
+3 Adelie  Torgersen male    2007 flipper_length_mm  181  
+4 Adelie  Torgersen male    2007 body_mass_g       3750  
+5 Adelie  Torgersen female  2007 bill_length_mm      39.5
+6 Adelie  Torgersen female  2007 bill_depth_mm       17.4</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot the graph</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>penguins_long <span class="sc">|&gt;</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(value) <span class="sc">|&gt;</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">fill =</span> species)) <span class="sc">+</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> measurement_type, <span class="at">scales =</span> <span class="st">"free_x"</span>) <span class="sc">+</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Morphometric distributions across penguin species"</span>,</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Measurement value"</span>,</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Workshop2_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Widening:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#First, let's calculate the mean body mass for each species on each island using group_by() and summarise().</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>mass_summary <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(body_mass_g) <span class="sc">|&gt;</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species, island) <span class="sc">|&gt;</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_mass =</span> <span class="fu">mean</span>(body_mass_g))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'species'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mass_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+# Groups:   species [3]
+  species   island    mean_mass
+  &lt;fct&gt;     &lt;fct&gt;         &lt;dbl&gt;
+1 Adelie    Biscoe        3710.
+2 Adelie    Dream         3688.
+3 Adelie    Torgersen     3706.
+4 Chinstrap Dream         3733.
+5 Gentoo    Biscoe        5076.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># now use pivot wider to pull island names into columns for publication readiness</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>mass_matrix <span class="ot">&lt;-</span> mass_summary <span class="sc">|&gt;</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> island,</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> mean_mass</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mass_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+# Groups:   species [3]
+  species   Biscoe Dream Torgersen
+  &lt;fct&gt;      &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
+1 Adelie     3710. 3688.     3706.
+2 Chinstrap    NA  3733.       NA 
+3 Gentoo     5076.   NA        NA </code></pre>
+</div>
+</div>
+</section>
+<section id="separating-and-uniting" class="level2">
+<h2 class="anchored" data-anchor-id="separating-and-uniting">2.7 Separating and uniting</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#SEPERATING</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>table3 <span class="sc">%&gt;%</span> </span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(rate, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"cases"</span>, <span class="st">"population"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  country      year cases  population
+  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     
+1 Afghanistan  1999 745    19987071  
+2 Afghanistan  2000 2666   20595360  
+3 Brazil       1999 37737  172006362 
+4 Brazil       2000 80488  174504898 
+5 China        1999 212258 1272915272
+6 China        2000 213766 1280428583</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#or</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>table3 <span class="sc">%&gt;%</span> </span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(rate, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"cases"</span>, <span class="st">"population"</span>), <span class="at">sep =</span> <span class="st">"/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  country      year cases  population
+  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     
+1 Afghanistan  1999 745    19987071  
+2 Afghanistan  2000 2666   20595360  
+3 Brazil       1999 37737  172006362 
+4 Brazil       2000 80488  174504898 
+5 China        1999 212258 1272915272
+6 China        2000 213766 1280428583</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># but we need to convert the seperated columns into integers so...</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>table3 <span class="sc">%&gt;%</span> </span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(rate, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"cases"</span>, <span class="st">"population"</span>), <span class="at">convert =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  country      year  cases population
+  &lt;chr&gt;       &lt;dbl&gt;  &lt;int&gt;      &lt;int&gt;
+1 Afghanistan  1999    745   19987071
+2 Afghanistan  2000   2666   20595360
+3 Brazil       1999  37737  172006362
+4 Brazil       2000  80488  174504898
+5 China        1999 212258 1272915272
+6 China        2000 213766 1280428583</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co">#you can also specify an integet to seperate at i.e positive starts from left and moves right and vice versa</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>table3 <span class="sc">%&gt;%</span> </span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(year, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"century"</span>, <span class="st">"year"</span>), <span class="at">sep =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  country     century year  rate             
+  &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;            
+1 Afghanistan 19      99    745/19987071     
+2 Afghanistan 20      00    2666/20595360    
+3 Brazil      19      99    37737/172006362  
+4 Brazil      20      00    80488/174504898  
+5 China       19      99    212258/1272915272
+6 China       20      00    213766/1280428583</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co">#UNITING (we define sep as "" to prevent seperators from being added between the joined values)</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>table5 <span class="sc">%&gt;%</span> </span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(new, century, year, <span class="at">sep =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  country     new   rate             
+  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;            
+1 Afghanistan 1999  745/19987071     
+2 Afghanistan 2000  2666/20595360    
+3 Brazil      1999  37737/172006362  
+4 Brazil      2000  80488/174504898  
+5 China       1999  212258/1272915272
+6 China       2000  213766/1280428583</code></pre>
+</div>
+</div>
+</section>
+<section id="wrangling-strings-and-dates" class="level2">
+<h2 class="anchored" data-anchor-id="wrangling-strings-and-dates">2.8 Wrangling strings and dates</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="co"># A remarkably messy data frame of field sites</span></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>messy_sites <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">site_id =</span> <span class="fu">c</span>(<span class="st">" Nelly Bay"</span>, <span class="st">"nelly_bay"</span>, <span class="st">"NELLY BAY"</span>, <span class="st">" Geoffrey_Bay "</span>, <span class="st">"geoffrey bay"</span>)</span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>messy_sites</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 1
+  site_id         
+  &lt;chr&gt;           
+1 " Nelly Bay"    
+2 "nelly_bay"     
+3 "NELLY BAY"     
+4 " Geoffrey_Bay "
+5 "geoffrey bay"  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using stringr within mutate to standardize the text</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>clean_sites <span class="ot">&lt;-</span> messy_sites <span class="sc">|&gt;</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Convert everything to lowercase</span></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">site_clean =</span> <span class="fu">str_to_lower</span>(site_id),</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. Trim any leading or trailing whitespace (invisible spaces at the ends)</span></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">site_clean =</span> <span class="fu">str_trim</span>(site_clean),</span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Replace any spaces with underscores</span></span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">site_clean =</span> <span class="fu">str_replace_all</span>(site_clean, <span class="at">pattern =</span> <span class="st">" "</span>, <span class="at">replacement =</span> <span class="st">"_"</span>),</span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(clean_sites)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  site_id          site_clean  
+  &lt;chr&gt;            &lt;chr&gt;       
+1 " Nelly Bay"     nelly_bay   
+2 "nelly_bay"      nelly_bay   
+3 "NELLY BAY"      nelly_bay   
+4 " Geoffrey_Bay " geoffrey_bay
+5 "geoffrey bay"   geoffrey_bay</code></pre>
+</div>
+</div>
+<p>using lubridate</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Parsing different date formats</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>date_1 <span class="ot">&lt;-</span> <span class="fu">dmy</span>(<span class="st">"25/12/2026"</span>)</span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>date_2 <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="st">"2026-12-25"</span>)</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a><span class="co"># R now recognizes these as identical Date objects</span></span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>date_1 <span class="sc">==</span> date_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble of raw sensor data with a messy character timestamp</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>sensor_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">raw_time =</span> <span class="fu">c</span>(<span class="st">"14-05-2026 08:30:00"</span>, <span class="st">"14-05-2026 08:45:00"</span>, <span class="st">"14-05-2026 09:00:00"</span>),</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">temperature =</span> <span class="fu">c</span>(<span class="fl">24.5</span>, <span class="fl">24.6</span>, <span class="fl">24.4</span>)</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>sensor_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  raw_time            temperature
+  &lt;chr&gt;                     &lt;dbl&gt;
+1 14-05-2026 08:30:00        24.5
+2 14-05-2026 08:45:00        24.6
+3 14-05-2026 09:00:00        24.4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting character strings to true POSIXct datetime objects</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>sensor_clean <span class="ot">&lt;-</span> sensor_data <span class="sc">|&gt;</span></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">true_time =</span> <span class="fu">dmy_hms</span>(raw_time)</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sensor_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  raw_time            temperature true_time          
+  &lt;chr&gt;                     &lt;dbl&gt; &lt;dttm&gt;             
+1 14-05-2026 08:30:00        24.5 2026-05-14 08:30:00
+2 14-05-2026 08:45:00        24.6 2026-05-14 08:45:00
+3 14-05-2026 09:00:00        24.4 2026-05-14 09:00:00</code></pre>
+</div>
+</div>
+</section>
+<section id="joining-tables" class="level2">
+<h2 class="anchored" data-anchor-id="joining-tables">2.9 joining tables</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Table 1: Biological observation data</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>observations <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">site_code =</span> <span class="fu">c</span>(<span class="st">"NB"</span>, <span class="st">"GB"</span>, <span class="st">"MI"</span>, <span class="st">"NB"</span>, <span class="st">"HB"</span>),</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">species =</span> <span class="fu">c</span>(<span class="st">"Trout"</span>, <span class="st">"Snapper"</span>, <span class="st">"Trout"</span>, <span class="st">"Cod"</span>, <span class="st">"Trout"</span>),</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">count =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">8</span>)</span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Table 2: Spatial metadata</span></span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>site_metadata <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">site_code =</span> <span class="fu">c</span>(<span class="st">"NB"</span>, <span class="st">"GB"</span>, <span class="st">"MI"</span>, <span class="st">"RP"</span>, <span class="st">"WP"</span>),</span>
+<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">zone =</span> <span class="fu">c</span>(<span class="st">"Marine National Park"</span>, <span class="st">"Conservation Park"</span>, <span class="st">"Habitat Protection"</span>, <span class="st">"General Use"</span>, <span class="st">"Other Use"</span>),</span>
+<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">lat =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">19.16</span>, <span class="sc">-</span><span class="fl">19.15</span>, <span class="sc">-</span><span class="fl">19.14</span>, <span class="sc">-</span><span class="fl">19.12</span>, <span class="sc">-</span><span class="fl">19.11</span>)</span>
+<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb68-14"><a href="#cb68-14" aria-hidden="true" tabindex="-1"></a>observations</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  site_code species count
+  &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;
+1 NB        Trout       5
+2 GB        Snapper     2
+3 MI        Trout       1
+4 NB        Cod         3
+5 HB        Trout       8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>site_metadata</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  site_code zone                   lat
+  &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt;
+1 NB        Marine National Park -19.2
+2 GB        Conservation Park    -19.2
+3 MI        Habitat Protection   -19.1
+4 RP        General Use          -19.1
+5 WP        Other Use            -19.1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Joining metadata to our observations</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>joined_data <span class="ot">&lt;-</span> observations <span class="sc">|&gt;</span></span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(site_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(site_code))</span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(joined_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+  site_code species count zone                   lat
+  &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;
+1 NB        Trout       5 Marine National Park -19.2
+2 GB        Snapper     2 Conservation Park    -19.2
+3 MI        Trout       1 Habitat Protection   -19.1
+4 NB        Cod         3 Marine National Park -19.2
+5 HB        Trout       8 &lt;NA&gt;                  NA  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co">#inner join which drops rows that dont have complete matches</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>matched_data <span class="ot">&lt;-</span> observations <span class="sc">|&gt;</span></span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(site_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(site_code))</span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(matched_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 4
+Columns: 5
+$ site_code &lt;chr&gt; "NB", "GB", "MI", "NB"
+$ species   &lt;chr&gt; "Trout", "Snapper", "Trout", "Cod"
+$ count     &lt;dbl&gt; 5, 2, 1, 3
+$ zone      &lt;chr&gt; "Marine National Park", "Conservation Park", "Habitat Protec…
+$ lat       &lt;dbl&gt; -19.16, -19.15, -19.14, -19.16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(matched_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  site_code species count zone                   lat
+  &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;
+1 NB        Trout       5 Marine National Park -19.2
+2 GB        Snapper     2 Conservation Park    -19.2
+3 MI        Trout       1 Habitat Protection   -19.1
+4 NB        Cod         3 Marine National Park -19.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which observations are missing from our metadata dictionary?</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>missing_context <span class="ot">&lt;-</span> observations <span class="sc">|&gt;</span></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(site_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(site_code))</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>missing_context</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  site_code species count
+  &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;
+1 HB        Trout       8</code></pre>
+</div>
+</div>
+</section>
+<section id="missing-values" class="level2">
+<h2 class="anchored" data-anchor-id="missing-values">2.10 Missing values</h2>
+<p>dealing with legacy N/A values (i.e.&nbsp;impossibly high placeholder values)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw data from an old temperature logger</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>logger_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">depth_m =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>),</span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">temp_c =</span> <span class="fu">c</span>(<span class="fl">24.5</span>, <span class="fl">24.1</span>, <span class="sc">-</span><span class="dv">999</span>, <span class="fl">23.5</span>)) <span class="co"># -999 is a known sensor error code</span></span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the -999 error codes to true NA values</span></span>
+<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>fixed_logger <span class="ot">&lt;-</span> logger_data <span class="sc">|&gt;</span></span>
+<span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">temp_c =</span> <span class="fu">na_if</span>(temp_c, <span class="sc">-</span><span class="dv">999</span>))</span>
+<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-10"><a href="#cb80-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fixed_logger)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  depth_m temp_c
+    &lt;dbl&gt;  &lt;dbl&gt;
+1      10   24.5
+2      20   24.1
+3      30   NA  
+4      40   23.5</code></pre>
+</div>
+</div>
+<p>replacing NAs with zeros or any other value</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate some count data</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>shark_counts <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">site =</span> <span class="fu">c</span>(<span class="st">"Reef_A"</span>, <span class="st">"Reef_B"</span>, <span class="st">"Reef_C"</span>),</span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">shark_count =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">5</span>)) <span class="co"># The NA here actually means 0 sharks were seen</span></span>
+<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace NA with 0 </span></span>
+<span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a>shark_fixed <span class="ot">&lt;-</span> shark_counts <span class="sc">|&gt;</span></span>
+<span id="cb82-8"><a href="#cb82-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">shark_count =</span> <span class="fu">coalesce</span>(shark_count, <span class="dv">0</span>))</span>
+<span id="cb82-9"><a href="#cb82-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-10"><a href="#cb82-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(shark_fixed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  site   shark_count
+  &lt;chr&gt;        &lt;dbl&gt;
+1 Reef_A           3
+2 Reef_B           0
+3 Reef_C           5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co">#NaN values</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>cpue_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">site =</span> <span class="fu">c</span>(<span class="st">"Bay_1"</span>, <span class="st">"Bay_2"</span>),</span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">catch =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">0</span>),</span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">effort_hours =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">0</span>))</span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating CPUE (catch / effort)</span></span>
+<span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a>cpue_calc <span class="ot">&lt;-</span> cpue_data <span class="sc">|&gt;</span></span>
+<span id="cb84-9"><a href="#cb84-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb84-10"><a href="#cb84-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">cpue =</span> catch <span class="sc">/</span> effort_hours)</span>
+<span id="cb84-11"><a href="#cb84-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-12"><a href="#cb84-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cpue_calc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  site  catch effort_hours  cpue
+  &lt;chr&gt; &lt;dbl&gt;        &lt;dbl&gt; &lt;dbl&gt;
+1 Bay_1    10            2     5
+2 Bay_2     0            0   NaN</code></pre>
+</div>
+</div>
+<p>implicit missing values:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>raw_catch <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">site =</span> <span class="fu">c</span>(<span class="st">"Reef_1"</span>, <span class="st">"Reef_1"</span>, <span class="st">"Reef_2"</span>),</span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">species =</span> <span class="fu">c</span>(<span class="st">"Pmaculatus"</span>, <span class="st">"Pleopardus"</span>, <span class="st">"Pmaculatus"</span>),</span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">count =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">8</span>))</span>
+<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a>raw_catch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  site   species    count
+  &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt;
+1 Reef_1 Pmaculatus     5
+2 Reef_1 Pleopardus     2
+3 Reef_2 Pmaculatus     8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Force inclusion of hidden zero-catch data</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>full_catch_matrix <span class="ot">&lt;-</span> raw_catch <span class="sc">|&gt;</span></span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(site, species, <span class="at">fill =</span> <span class="fu">list</span>(<span class="at">count =</span> <span class="dv">0</span>))</span>
+<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(full_catch_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  site   species    count
+  &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt;
+1 Reef_1 Pleopardus     2
+2 Reef_1 Pmaculatus     5
+3 Reef_2 Pleopardus     0
+4 Reef_2 Pmaculatus     8</code></pre>
+</div>
+</div>
+<p>drop_na()</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>sensor_log <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">day =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">salinity =</span> <span class="fu">c</span>(<span class="fl">35.2</span>, <span class="fl">35.1</span>, <span class="cn">NA</span>, <span class="fl">35.3</span>)</span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove any row where salinity is missing</span></span>
+<span id="cb90-7"><a href="#cb90-7" aria-hidden="true" tabindex="-1"></a>clean_log <span class="ot">&lt;-</span> sensor_log <span class="sc">|&gt;</span></span>
+<span id="cb90-8"><a href="#cb90-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(salinity)</span>
+<span id="cb90-9"><a href="#cb90-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-10"><a href="#cb90-10" aria-hidden="true" tabindex="-1"></a>clean_log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+    day salinity
+  &lt;int&gt;    &lt;dbl&gt;
+1     1     35.2
+2     2     35.1
+3     4     35.3</code></pre>
+</div>
+</div>
+<p>Exercise 1:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure packages are loaded</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a><span class="co"># The messy metadata provided by your colleague</span></span>
+<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a>island_metadata <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">island_name =</span> <span class="fu">c</span>(<span class="st">" biscoe"</span>, <span class="st">"Dream "</span>, <span class="st">"Torgersen"</span>),</span>
+<span id="cb92-8"><a href="#cb92-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">station_install =</span> <span class="fu">c</span>(<span class="st">"15/01/2003"</span>, <span class="st">"22-03-2004"</span>, <span class="st">"05/11/2001"</span>),</span>
+<span id="cb92-9"><a href="#cb92-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">latitude =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">64.81</span>, <span class="sc">-</span><span class="fl">64.73</span>, <span class="sc">-</span><span class="fl">64.76</span>)</span>
+<span id="cb92-10"><a href="#cb92-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb92-11"><a href="#cb92-11" aria-hidden="true" tabindex="-1"></a>penguins</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+ 1 Adelie  Torgersen           39.1          18.7               181        3750
+ 2 Adelie  Torgersen           39.5          17.4               186        3800
+ 3 Adelie  Torgersen           40.3          18                 195        3250
+ 4 Adelie  Torgersen           NA            NA                  NA          NA
+ 5 Adelie  Torgersen           36.7          19.3               193        3450
+ 6 Adelie  Torgersen           39.3          20.6               190        3650
+ 7 Adelie  Torgersen           38.9          17.8               181        3625
+ 8 Adelie  Torgersen           39.2          19.6               195        4675
+ 9 Adelie  Torgersen           34.1          18.1               193        3475
+10 Adelie  Torgersen           42            20.2               190        4250
+# ℹ 334 more rows
+# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(island_metadata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  island_name station_install latitude
+  &lt;chr&gt;       &lt;chr&gt;              &lt;dbl&gt;
+1 " biscoe"   15/01/2003         -64.8
+2 "Dream "    22-03-2004         -64.7
+3 "Torgersen" 05/11/2001         -64.8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using stringr within mutate to standardize the text</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>clean_metadata <span class="ot">&lt;-</span> island_metadata <span class="sc">|&gt;</span></span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Convert everything to Title case</span></span>
+<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">island_name =</span> <span class="fu">str_to_title</span>(island_name),</span>
+<span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. Trim any leading or trailing whitespace (invisible spaces at the ends)</span></span>
+<span id="cb96-7"><a href="#cb96-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">island_name =</span> <span class="fu">str_trim</span>(island_name),</span>
+<span id="cb96-8"><a href="#cb96-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Replace any spaces with underscores</span></span>
+<span id="cb96-9"><a href="#cb96-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">island_name =</span> <span class="fu">str_replace_all</span>(island_name, <span class="at">pattern =</span> <span class="st">" "</span>, <span class="at">replacement =</span> <span class="st">"_"</span>),</span>
+<span id="cb96-10"><a href="#cb96-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">#convert dates to true dates with lubridate</span></span>
+<span id="cb96-11"><a href="#cb96-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">station_install =</span> <span class="fu">dmy</span>(station_install)</span>
+<span id="cb96-12"><a href="#cb96-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb96-13"><a href="#cb96-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-14"><a href="#cb96-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(clean_metadata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  island_name station_install latitude
+  &lt;chr&gt;       &lt;date&gt;             &lt;dbl&gt;
+1 Biscoe      2003-01-15         -64.8
+2 Dream       2004-03-22         -64.7
+3 Torgersen   2001-11-05         -64.8</code></pre>
+</div>
+</div>
+<p>Exercise 2</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Joining metadata to our observations</span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>penguins_spatial <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(clean_metadata, <span class="at">by =</span> <span class="fu">join_by</span>(island <span class="sc">==</span> island_name))</span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(penguins_spatial)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 10
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+   &lt;fct&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+ 1 Adelie  Torgersen           39.1          18.7               181        3750
+ 2 Adelie  Torgersen           39.5          17.4               186        3800
+ 3 Adelie  Torgersen           40.3          18                 195        3250
+ 4 Adelie  Torgersen           NA            NA                  NA          NA
+ 5 Adelie  Torgersen           36.7          19.3               193        3450
+ 6 Adelie  Torgersen           39.3          20.6               190        3650
+ 7 Adelie  Torgersen           38.9          17.8               181        3625
+ 8 Adelie  Torgersen           39.2          19.6               195        4675
+ 9 Adelie  Torgersen           34.1          18.1               193        3475
+10 Adelie  Torgersen           42            20.2               190        4250
+# ℹ 334 more rows
+# ℹ 4 more variables: sex &lt;fct&gt;, year &lt;int&gt;, station_install &lt;date&gt;,
+#   latitude &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins_spatial)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+  &lt;fct&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+1 Adelie  Torgersen           39.1          18.7               181        3750
+2 Adelie  Torgersen           39.5          17.4               186        3800
+3 Adelie  Torgersen           40.3          18                 195        3250
+4 Adelie  Torgersen           NA            NA                  NA          NA
+5 Adelie  Torgersen           36.7          19.3               193        3450
+6 Adelie  Torgersen           39.3          20.6               190        3650
+# ℹ 4 more variables: sex &lt;fct&gt;, year &lt;int&gt;, station_install &lt;date&gt;,
+#   latitude &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Exercise 3</p>
+<section id="exercise-3-the-wide-summary-matrix" class="level4">
+<h4 class="anchored" data-anchor-id="exercise-3-the-wide-summary-matrix"><strong>Exercise 3: The Wide Summary Matrix</strong></h4>
+<p>A collaborator has asked for a clean, publication-ready table showing the <strong>maximum body mass</strong> recorded for each species, separated by island.</p>
+<p><strong>Task:</strong> Starting with your penguins_spatial dataset:</p>
+<p>Drop any missing values in the body_mass_g column.</p>
+<ol type="1">
+<li><p>Group by species and island.</p></li>
+<li><p>Summarise the data to find the maximum body mass (max()).</p></li>
+<li><p>Pivot the dataset wider so that the species form the rows, and the islands form the columns.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove any row where body_mass is missing</span></span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>clean_penguins_spatial <span class="ot">&lt;-</span> penguins_spatial <span class="sc">|&gt;</span></span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(body_mass_g)</span>
+<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(clean_penguins_spatial)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 342 × 10
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+   &lt;fct&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+ 1 Adelie  Torgersen           39.1          18.7               181        3750
+ 2 Adelie  Torgersen           39.5          17.4               186        3800
+ 3 Adelie  Torgersen           40.3          18                 195        3250
+ 4 Adelie  Torgersen           36.7          19.3               193        3450
+ 5 Adelie  Torgersen           39.3          20.6               190        3650
+ 6 Adelie  Torgersen           38.9          17.8               181        3625
+ 7 Adelie  Torgersen           39.2          19.6               195        4675
+ 8 Adelie  Torgersen           34.1          18.1               193        3475
+ 9 Adelie  Torgersen           42            20.2               190        4250
+10 Adelie  Torgersen           37.8          17.1               186        3300
+# ℹ 332 more rows
+# ℹ 4 more variables: sex &lt;fct&gt;, year &lt;int&gt;, station_install &lt;date&gt;,
+#   latitude &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Group by species and island and summarise to find max body mass</span></span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>clean_penguins_spatial_mass_summary <span class="ot">&lt;-</span> clean_penguins_spatial <span class="sc">|&gt;</span></span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species, island) <span class="sc">|&gt;</span></span>
+<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">maximum_mass =</span> <span class="fu">max</span>(body_mass_g))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'species'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(clean_penguins_spatial_mass_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+# Groups:   species [3]
+  species   island    maximum_mass
+  &lt;fct&gt;     &lt;chr&gt;            &lt;int&gt;
+1 Adelie    Biscoe            4775
+2 Adelie    Dream             4650
+3 Adelie    Torgersen         4700
+4 Chinstrap Dream             4800
+5 Gentoo    Biscoe            6300</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pivot wider to pull island names into columns and keep species in rows</span></span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>spatial_max_mass_matrix <span class="ot">&lt;-</span> clean_penguins_spatial_mass_summary <span class="sc">|&gt;</span></span>
+<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> island,</span>
+<span id="cb108-5"><a href="#cb108-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> maximum_mass</span>
+<span id="cb108-6"><a href="#cb108-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb108-7"><a href="#cb108-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(spatial_max_mass_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+# Groups:   species [3]
+  species   Biscoe Dream Torgersen
+  &lt;fct&gt;      &lt;int&gt; &lt;int&gt;     &lt;int&gt;
+1 Adelie      4775  4650      4700
+2 Chinstrap     NA  4800        NA
+3 Gentoo      6300    NA        NA</code></pre>
+</div>
+</div>
+</section>
+<section id="keystone-exercise-estuary-fish-survey---data-rescue-mission" class="level3">
+<h3 class="anchored" data-anchor-id="keystone-exercise-estuary-fish-survey---data-rescue-mission"><strong>2.12 Keystone exercise: Estuary Fish Survey - Data Rescue Mission</strong></h3>
+<p><strong>The Premise:</strong> You have inherited a project from a former PhD student who was studying the relationship between water quality and predatory fish assemblages along the Ross River Estuary gradient. Unfortunately, their data management was entirely manual, and the files are a disaster.</p>
+<p>They left you with four separate datasets:</p>
+<ol type="1">
+<li><p>estuary_catch_log.xlsx: Handwritten field counts of fish species (using common names), spread across multiple spreadsheet tabs.</p></li>
+<li><p>estuary_metadata.csv: The spatial coordinates and estuary zones for each site.</p></li>
+<li><p>estuary_sonde_data.csv: High-frequency water quality sensor readings.</p></li>
+<li><p>species_dictionary.csv: A taxonomic lookup table linking local common names to their accepted scientific names.</p></li>
+</ol>
+<p>Your mission is to write a single, reproducible R script (or .qmd) that ingests this mess, cleans it, joins it into a single master dataset, and produces a publication-ready visualisation of the estuary’s ecology.</p>
+<p>Note: the datasets are now available in the <a href="https://github.com/MB-5370/R4MarineScience">class repository</a></p>
+<section id="deliverables-to-include-in-eportfolio-reportpage" class="level4">
+<h4 class="anchored" data-anchor-id="deliverables-to-include-in-eportfolio-reportpage"><strong>Deliverables (to include in ePortfolio report/page)</strong></h4>
+<p>At the end of this exercise, your final script/document must successfully output:</p>
+<ol type="1">
+<li><p><strong>A clean master dataset</strong> containing no legacy errors (-999.0), standardised text, a complete zero-catch framework, and scientific names instead of common names.</p></li>
+<li><p><strong>A statistical summary table</strong> displaying the mean and standard deviation of fish counts and salinity for each species per zone.</p></li>
+<li><p><strong>A multi-panel plot</strong> (faceted by species) showing fish abundance along the salinity gradient, formatted to professional publication standards.</p></li>
+</ol>
+</section>
+<section id="rules-of-engagement" class="level4">
+<h4 class="anchored" data-anchor-id="rules-of-engagement"><strong>Rules of Engagement</strong></h4>
+<p>Because this is an open-ended task, there is no single “correct” way to approach this and structure your code. However, think about all the data-wrangling and visualisation skills you have developed over recent weeks, and adhere to the following professional standards:</p>
+<ul>
+<li><p><strong>Monitor your AI agents:</strong> You are encouraged to use AI to help you write code. However, for every major data wrangling step, make sure you understand what is going on and are not just running AI-written code blindly.</p></li>
+<li><p><strong>Annotate your work:</strong> To help you with the above, make sure you include comments (#) explaining what the code is doing. If you used an AI prompt to generate a complex block of code, paste your prompt as a comment above it.</p></li>
+</ul>
+<ol type="1">
+<li><strong>Utilise the tidyverse:</strong> There are many ways of wrangling data, but here we are looking for you to use your growing skills in dplyr, tidyr, stringr, and lubridate functions linked by the pipe (|&gt; or %&gt;%).</li>
+</ol>
+<ul>
+<li><strong>Reproducible workflow:</strong> Make sure you stay on top of your PC → Git → GitHub lifecycle, by utilising: save, commit, pull, push!</li>
+</ul>
+<p>Load Packages</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb110-4"><a href="#cb110-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'readxl' was built under R version 4.5.3</code></pre>
+</div>
+</div>
+<p>Load estuary_catch_log.xlsx (main dataset)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>catch_log1 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/estuary_catch_log.xlsx"</span>), <span class="at">sheet =</span> <span class="st">"Lower_ross"</span>)</span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>catch_log2 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/estuary_catch_log.xlsx"</span>), <span class="at">sheet =</span> <span class="st">"Mid_Ross "</span>)</span>
+<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a>catch_log3 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/estuary_catch_log.xlsx"</span>), <span class="at">sheet =</span> <span class="st">"ROSS MOUTH"</span>)</span>
+<span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a>catch_log4 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/estuary_catch_log.xlsx"</span>), <span class="at">sheet =</span> <span class="st">"Upper Ross"</span>)</span>
+<span id="cb112-5"><a href="#cb112-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb112-6"><a href="#cb112-6" aria-hidden="true" tabindex="-1"></a>catch_log1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 104 × 4
+   site       date                species       count
+   &lt;chr&gt;      &lt;dttm&gt;              &lt;chr&gt;         &lt;dbl&gt;
+ 1 Lower_ross 2026-05-01 00:00:00 barramundi        6
+ 2 Lower_ross 2026-05-01 00:00:00 MANGROVE JACK     3
+ 3 Lower_ross 2026-05-01 00:00:00 bream             4
+ 4 Lower_ross 2026-05-01 00:00:00 flathead          2
+ 5 Lower_ross 2026-05-02 00:00:00 barramundi        1
+ 6 Lower_ross 2026-05-02 00:00:00 MANGROVE JACK     1
+ 7 Lower_ross 2026-05-02 00:00:00 bream             3
+ 8 Lower_ross 2026-05-02 00:00:00 flathead          3
+ 9 Lower_ross 2026-05-03 00:00:00 MANGROVE JACK     2
+10 Lower_ross 2026-05-03 00:00:00 flathead          3
+# ℹ 94 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>catch_log2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 106 × 4
+   site     date                species       count
+   &lt;chr&gt;    &lt;dttm&gt;              &lt;chr&gt;         &lt;dbl&gt;
+ 1 Mid_Ross 2026-05-01 00:00:00 barramundi        4
+ 2 Mid_Ross 2026-05-01 00:00:00 MANGROVE JACK     2
+ 3 Mid_Ross 2026-05-01 00:00:00 bream             2
+ 4 Mid_Ross 2026-05-01 00:00:00 flathead          3
+ 5 Mid_Ross 2026-05-02 00:00:00 MANGROVE JACK     1
+ 6 Mid_Ross 2026-05-02 00:00:00 bream             2
+ 7 Mid_Ross 2026-05-02 00:00:00 flathead          3
+ 8 Mid_Ross 2026-05-03 00:00:00 barramundi        3
+ 9 Mid_Ross 2026-05-03 00:00:00 MANGROVE JACK     2
+10 Mid_Ross 2026-05-03 00:00:00 bream             1
+# ℹ 96 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>catch_log3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 107 × 4
+   site       date                species       count
+   &lt;chr&gt;      &lt;dttm&gt;              &lt;chr&gt;         &lt;dbl&gt;
+ 1 ROSS MOUTH 2026-05-01 00:00:00 barramundi        3
+ 2 ROSS MOUTH 2026-05-01 00:00:00 MANGROVE JACK     2
+ 3 ROSS MOUTH 2026-05-01 00:00:00 flathead          9
+ 4 ROSS MOUTH 2026-05-02 00:00:00 MANGROVE JACK     1
+ 5 ROSS MOUTH 2026-05-02 00:00:00 bream             3
+ 6 ROSS MOUTH 2026-05-02 00:00:00 flathead          4
+ 7 ROSS MOUTH 2026-05-03 00:00:00 barramundi        1
+ 8 ROSS MOUTH 2026-05-03 00:00:00 MANGROVE JACK     1
+ 9 ROSS MOUTH 2026-05-03 00:00:00 bream             2
+10 ROSS MOUTH 2026-05-03 00:00:00 flathead          7
+# ℹ 97 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>catch_log4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 110 × 4
+   site       date                species       count
+   &lt;chr&gt;      &lt;dttm&gt;              &lt;chr&gt;         &lt;dbl&gt;
+ 1 Upper Ross 2026-05-01 00:00:00 barramundi        5
+ 2 Upper Ross 2026-05-01 00:00:00 bream             2
+ 3 Upper Ross 2026-05-01 00:00:00 flathead          6
+ 4 Upper Ross 2026-05-02 00:00:00 barramundi        8
+ 5 Upper Ross 2026-05-02 00:00:00 MANGROVE JACK     1
+ 6 Upper Ross 2026-05-02 00:00:00 bream             2
+ 7 Upper Ross 2026-05-02 00:00:00 flathead          4
+ 8 Upper Ross 2026-05-03 00:00:00 barramundi        4
+ 9 Upper Ross 2026-05-03 00:00:00 bream             2
+10 Upper Ross 2026-05-04 00:00:00 barramundi        5
+# ℹ 100 more rows</code></pre>
+</div>
+</div>
+<p>Bind the dataframes together</p>
+<p>prompt used: how do i bind the following dataframes together, ensuring they share the same fields and columns</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>combined_catch_log <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(catch_log1, catch_log2, catch_log3, catch_log4)</span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>combined_catch_log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 427 × 4
+   site       date                species       count
+   &lt;chr&gt;      &lt;dttm&gt;              &lt;chr&gt;         &lt;dbl&gt;
+ 1 Lower_ross 2026-05-01 00:00:00 barramundi        6
+ 2 Lower_ross 2026-05-01 00:00:00 MANGROVE JACK     3
+ 3 Lower_ross 2026-05-01 00:00:00 bream             4
+ 4 Lower_ross 2026-05-01 00:00:00 flathead          2
+ 5 Lower_ross 2026-05-02 00:00:00 barramundi        1
+ 6 Lower_ross 2026-05-02 00:00:00 MANGROVE JACK     1
+ 7 Lower_ross 2026-05-02 00:00:00 bream             3
+ 8 Lower_ross 2026-05-02 00:00:00 flathead          3
+ 9 Lower_ross 2026-05-03 00:00:00 MANGROVE JACK     2
+10 Lower_ross 2026-05-03 00:00:00 flathead          3
+# ℹ 417 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check how many species and sites are present</span></span>
+<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>combined_catch_log <span class="sc">|&gt;</span> </span>
+<span id="cb122-3"><a href="#cb122-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(site)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 1
+  site      
+  &lt;chr&gt;     
+1 Lower_ross
+2 Mid_Ross  
+3 ROSS MOUTH
+4 Upper Ross</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>combined_catch_log <span class="sc">|&gt;</span> </span>
+<span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 1
+  species      
+  &lt;chr&gt;        
+1 barramundi   
+2 MANGROVE JACK
+3 bream        
+4 flathead     </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="co">#clear unnecessary data from workspace</span></span>
+<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(catch_log1, catch_log2, catch_log3, catch_log4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Standardise site and species names and converting dates from strings to date-time</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using stringr within mutate to standardize the text</span></span>
+<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a>catch_clean <span class="ot">&lt;-</span> combined_catch_log <span class="sc">|&gt;</span></span>
+<span id="cb127-3"><a href="#cb127-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb127-4"><a href="#cb127-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Convert everything to lower case for site name</span></span>
+<span id="cb127-5"><a href="#cb127-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">site =</span> <span class="fu">str_to_lower</span>(site),</span>
+<span id="cb127-6"><a href="#cb127-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Trim any leading or trailing whitespace (invisible spaces at the ends) for site name</span></span>
+<span id="cb127-7"><a href="#cb127-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">site =</span> <span class="fu">str_trim</span>(site),</span>
+<span id="cb127-8"><a href="#cb127-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. Replace any spaces with underscores site name</span></span>
+<span id="cb127-9"><a href="#cb127-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">site =</span> <span class="fu">str_replace_all</span>(site, <span class="at">pattern =</span> <span class="st">" "</span>, <span class="at">replacement =</span> <span class="st">"_"</span>),</span>
+<span id="cb127-10"><a href="#cb127-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Convert everything to lower case for species</span></span>
+<span id="cb127-11"><a href="#cb127-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">species =</span> <span class="fu">str_to_lower</span>(species),</span>
+<span id="cb127-12"><a href="#cb127-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Trim any leading or trailing whitespace (invisible spaces at the ends) for species</span></span>
+<span id="cb127-13"><a href="#cb127-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">species =</span> <span class="fu">str_trim</span>(species),</span>
+<span id="cb127-14"><a href="#cb127-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. Replace any spaces with underscores for species</span></span>
+<span id="cb127-15"><a href="#cb127-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">species =</span> <span class="fu">str_replace_all</span>(species, <span class="at">pattern =</span> <span class="st">" "</span>, <span class="at">replacement =</span> <span class="st">"_"</span>),</span>
+<span id="cb127-16"><a href="#cb127-16" aria-hidden="true" tabindex="-1"></a>     <span class="co">#convert dates to true dates with lubridate</span></span>
+<span id="cb127-17"><a href="#cb127-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">date =</span> <span class="fu">ymd</span>(date)</span>
+<span id="cb127-18"><a href="#cb127-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span>  <span class="co"># Convert all chr to fct</span></span>
+<span id="cb127-19"><a href="#cb127-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as_factor)</span>
+<span id="cb127-20"><a href="#cb127-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb127-21"><a href="#cb127-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb127-22"><a href="#cb127-22" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(catch_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 427 × 4
+   site       date       species       count
+   &lt;fct&gt;      &lt;date&gt;     &lt;fct&gt;         &lt;dbl&gt;
+ 1 lower_ross 2026-05-01 barramundi        6
+ 2 lower_ross 2026-05-01 mangrove_jack     3
+ 3 lower_ross 2026-05-01 bream             4
+ 4 lower_ross 2026-05-01 flathead          2
+ 5 lower_ross 2026-05-02 barramundi        1
+ 6 lower_ross 2026-05-02 mangrove_jack     1
+ 7 lower_ross 2026-05-02 bream             3
+ 8 lower_ross 2026-05-02 flathead          3
+ 9 lower_ross 2026-05-03 mangrove_jack     2
+10 lower_ross 2026-05-03 flathead          3
+# ℹ 417 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="co">#using distinct to check species again</span></span>
+<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb129-3"><a href="#cb129-3" aria-hidden="true" tabindex="-1"></a>catch_clean <span class="sc">|&gt;</span> </span>
+<span id="cb129-4"><a href="#cb129-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(site)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 1
+  site      
+  &lt;fct&gt;     
+1 lower_ross
+2 mid_ross  
+3 ross_mouth
+4 upper_ross</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a>catch_clean <span class="sc">|&gt;</span> </span>
+<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 1
+  species      
+  &lt;fct&gt;        
+1 barramundi   
+2 mangrove_jack
+3 bream        
+4 flathead     </code></pre>
+</div>
+</div>
+<p>Load metadata</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a>estuary_metadata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/estuary_metadata.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 4 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): site_name, zone
+dbl (2): lat, lon
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>sonde_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/estuary_sonde_data.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 11520 Columns: 5
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): site, timestamp
+dbl (3): temperature, salinity, turbidity
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>species_dictionary <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/species_dictionary.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 4 Columns: 2
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): common_name, scientific_name
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>standardise metadata</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using stringr within mutate to standardize the text</span></span>
+<span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a>estuary_metadata_clean <span class="ot">&lt;-</span> estuary_metadata <span class="sc">|&gt;</span></span>
+<span id="cb139-3"><a href="#cb139-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb139-4"><a href="#cb139-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Convert everything to lower case for site name</span></span>
+<span id="cb139-5"><a href="#cb139-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">site_name =</span> <span class="fu">str_to_lower</span>(site_name),</span>
+<span id="cb139-6"><a href="#cb139-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Trim any leading or trailing whitespace (invisible spaces at the ends) for site name</span></span>
+<span id="cb139-7"><a href="#cb139-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">site_name =</span> <span class="fu">str_trim</span>(site_name),</span>
+<span id="cb139-8"><a href="#cb139-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. Replace any spaces with underscores site name</span></span>
+<span id="cb139-9"><a href="#cb139-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">site_name =</span> <span class="fu">str_replace_all</span>(site_name, <span class="at">pattern =</span> <span class="st">" "</span>, <span class="at">replacement =</span> <span class="st">"_"</span>)</span>
+<span id="cb139-10"><a href="#cb139-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb139-11"><a href="#cb139-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span>  <span class="co"># Convert all chr to fct</span></span>
+<span id="cb139-12"><a href="#cb139-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as_factor)</span>
+<span id="cb139-13"><a href="#cb139-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb139-14"><a href="#cb139-14" aria-hidden="true" tabindex="-1"></a>estuary_metadata_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 4
+  site_name    lat   lon zone      
+  &lt;fct&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;     
+1 upper_ross -19.3  147. Upstream  
+2 mid_ross   -19.3  147. Middle    
+3 lower_ross -19.3  147. Downstream
+4 ross_mouth -19.2  147. Marine    </code></pre>
+</div>
+</div>
+<p>Fix dates in sonde and fix NA values</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a>sonde_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11,520 × 5
+   site       timestamp        temperature salinity turbidity
+   &lt;chr&gt;      &lt;chr&gt;                  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+ 1 upper_ross 01/05/2026 00:00        23.7     4.05      6.49
+ 2 mid_ross   01/05/2026 00:00        24.1    15.7      49.2 
+ 3 lower_ross 01/05/2026 00:00        24.2    28.9      48.1 
+ 4 ross_mouth 01/05/2026 00:00        24.6    33.9      49.8 
+ 5 upper_ross 01/05/2026 00:15        26.1     3.96     25.2 
+ 6 mid_ross   01/05/2026 00:15        24.6    12.1      34.8 
+ 7 lower_ross 01/05/2026 00:15        22.9    30.9      33.9 
+ 8 ross_mouth 01/05/2026 00:15        20.6    33.9      27.4 
+ 9 upper_ross 01/05/2026 00:30        24.9     4.32     13.0 
+10 mid_ross   01/05/2026 00:30        24.3    17.4      31.9 
+# ℹ 11,510 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the -999 error codes to true NA values</span></span>
+<span id="cb143-2"><a href="#cb143-2" aria-hidden="true" tabindex="-1"></a>fixed_sonde <span class="ot">&lt;-</span> sonde_data <span class="sc">|&gt;</span></span>
+<span id="cb143-3"><a href="#cb143-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">turbidity =</span> <span class="fu">na_if</span>(turbidity, <span class="sc">-</span><span class="fl">999.0</span>),</span>
+<span id="cb143-4"><a href="#cb143-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">timestamp =</span> <span class="fu">dmy_hm</span>(timestamp),</span>
+<span id="cb143-5"><a href="#cb143-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">salinity =</span> <span class="fu">ifelse</span>(salinity <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="cn">NA</span>, salinity)<span class="co">#convert negatuve salinity to NA</span></span>
+<span id="cb143-6"><a href="#cb143-6" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">|&gt;</span>  <span class="co"># Convert all chr to fct</span></span>
+<span id="cb143-7"><a href="#cb143-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as_factor)</span>
+<span id="cb143-8"><a href="#cb143-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb143-9"><a href="#cb143-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb143-10"><a href="#cb143-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fixed_sonde)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11,520 × 5
+   site       timestamp           temperature salinity turbidity
+   &lt;fct&gt;      &lt;dttm&gt;                    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+ 1 upper_ross 2026-05-01 00:00:00        23.7     4.05      6.49
+ 2 mid_ross   2026-05-01 00:00:00        24.1    15.7      49.2 
+ 3 lower_ross 2026-05-01 00:00:00        24.2    28.9      48.1 
+ 4 ross_mouth 2026-05-01 00:00:00        24.6    33.9      49.8 
+ 5 upper_ross 2026-05-01 00:15:00        26.1     3.96     25.2 
+ 6 mid_ross   2026-05-01 00:15:00        24.6    12.1      34.8 
+ 7 lower_ross 2026-05-01 00:15:00        22.9    30.9      33.9 
+ 8 ross_mouth 2026-05-01 00:15:00        20.6    33.9      27.4 
+ 9 upper_ross 2026-05-01 00:30:00        24.9     4.32     13.0 
+10 mid_ross   2026-05-01 00:30:00        24.3    17.4      31.9 
+# ℹ 11,510 more rows</code></pre>
+</div>
+</div>
+<p>fix species dictionary</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a>species_dictionary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  common_name   scientific_name          
+  &lt;chr&gt;         &lt;chr&gt;                    
+1 barramundi    Lates calcarifer         
+2 mangrove_jack Lutjanus argentimaculatus
+3 bream         Acanthopagrus spp.       
+4 flathead      Platycephalus spp.       </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb147"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a>fixed_species <span class="ot">&lt;-</span> species_dictionary <span class="sc">|&gt;</span></span>
+<span id="cb147-2"><a href="#cb147-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb147-3"><a href="#cb147-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Convert everything to lower case for site name</span></span>
+<span id="cb147-4"><a href="#cb147-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">common_name =</span> <span class="fu">str_to_lower</span>(common_name),</span>
+<span id="cb147-5"><a href="#cb147-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Trim any leading or trailing whitespace (invisible spaces at the ends) for site name</span></span>
+<span id="cb147-6"><a href="#cb147-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">common_name =</span> <span class="fu">str_trim</span>(common_name),</span>
+<span id="cb147-7"><a href="#cb147-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. Replace any spaces with underscores site name</span></span>
+<span id="cb147-8"><a href="#cb147-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">common_name =</span> <span class="fu">str_replace_all</span>(common_name, <span class="at">pattern =</span> <span class="st">" "</span>, <span class="at">replacement =</span> <span class="st">"_"</span>)</span>
+<span id="cb147-9"><a href="#cb147-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb147-10"><a href="#cb147-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span>  <span class="co"># Convert all chr to fct</span></span>
+<span id="cb147-11"><a href="#cb147-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as_factor)</span>
+<span id="cb147-12"><a href="#cb147-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb147-13"><a href="#cb147-13" aria-hidden="true" tabindex="-1"></a>fixed_species</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  common_name   scientific_name          
+  &lt;fct&gt;         &lt;fct&gt;                    
+1 barramundi    Lates calcarifer         
+2 mangrove_jack Lutjanus argentimaculatus
+3 bream         Acanthopagrus spp.       
+4 flathead      Platycephalus spp.       </code></pre>
+</div>
+</div>
+<p>Phase 2:</p>
+<p>summarise sensor data (note that you might need to change the posixct variable type across the board</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb149"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a>daily_sonde_summary <span class="ot">&lt;-</span> fixed_sonde <span class="sc">|&gt;</span></span>
+<span id="cb149-2"><a href="#cb149-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb149-3"><a href="#cb149-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">date =</span> <span class="fu">as_date</span>(<span class="fu">floor_date</span>(timestamp, <span class="st">"day"</span>)) <span class="co">#round timestaps to days and set it to date format</span></span>
+<span id="cb149-4"><a href="#cb149-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb149-5"><a href="#cb149-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(site, date) <span class="sc">|&gt;</span></span>
+<span id="cb149-6"><a href="#cb149-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb149-7"><a href="#cb149-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_temperature =</span> <span class="fu">mean</span>(temperature, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb149-8"><a href="#cb149-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_salinity =</span> <span class="fu">mean</span>(salinity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb149-9"><a href="#cb149-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">mean_turbidity =</span> <span class="fu">mean</span>(turbidity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb149-10"><a href="#cb149-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb149-11"><a href="#cb149-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb149-12"><a href="#cb149-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb149-13"><a href="#cb149-13" aria-hidden="true" tabindex="-1"></a>daily_sonde_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 120 × 5
+   site       date       mean_temperature mean_salinity mean_turbidity
+   &lt;fct&gt;      &lt;date&gt;                &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;
+ 1 upper_ross 2026-05-01             24.1          4.88           24.7
+ 2 upper_ross 2026-05-02             23.9          4.98           25.1
+ 3 upper_ross 2026-05-03             23.9          4.99           26.3
+ 4 upper_ross 2026-05-04             23.9          4.65           25.8
+ 5 upper_ross 2026-05-05             24.2          4.89           25.3
+ 6 upper_ross 2026-05-06             24.0          5.26           27.0
+ 7 upper_ross 2026-05-07             23.7          4.84           25.1
+ 8 upper_ross 2026-05-08             23.8          5.00           23.9
+ 9 upper_ross 2026-05-09             24.1          4.76           24.5
+10 upper_ross 2026-05-10             24.1          5.08           25.2
+# ℹ 110 more rows</code></pre>
+</div>
+</div>
+<p>merge species_dictionary with main data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb151"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a>merge_catch <span class="ot">&lt;-</span> catch_clean <span class="sc">|&gt;</span></span>
+<span id="cb151-2"><a href="#cb151-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(fixed_species, <span class="at">by =</span> <span class="fu">join_by</span>(species <span class="sc">==</span> common_name)) <span class="sc">|&gt;</span></span>
+<span id="cb151-3"><a href="#cb151-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">common_name =</span> species) <span class="co">#rename the column containing common names previously named "species" to an appropriate heading</span></span>
+<span id="cb151-4"><a href="#cb151-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb151-5"><a href="#cb151-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb151-6"><a href="#cb151-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(merge_catch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 427 × 5
+   site       date       common_name   count scientific_name          
+   &lt;fct&gt;      &lt;date&gt;     &lt;fct&gt;         &lt;dbl&gt; &lt;fct&gt;                    
+ 1 lower_ross 2026-05-01 barramundi        6 Lates calcarifer         
+ 2 lower_ross 2026-05-01 mangrove_jack     3 Lutjanus argentimaculatus
+ 3 lower_ross 2026-05-01 bream             4 Acanthopagrus spp.       
+ 4 lower_ross 2026-05-01 flathead          2 Platycephalus spp.       
+ 5 lower_ross 2026-05-02 barramundi        1 Lates calcarifer         
+ 6 lower_ross 2026-05-02 mangrove_jack     1 Lutjanus argentimaculatus
+ 7 lower_ross 2026-05-02 bream             3 Acanthopagrus spp.       
+ 8 lower_ross 2026-05-02 flathead          3 Platycephalus spp.       
+ 9 lower_ross 2026-05-03 mangrove_jack     2 Lutjanus argentimaculatus
+10 lower_ross 2026-05-03 flathead          3 Platycephalus spp.       
+# ℹ 417 more rows</code></pre>
+</div>
+</div>
+<p>merge with sensor data and spatial data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb153"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a>full_merge_catch <span class="ot">&lt;-</span> merge_catch <span class="sc">|&gt;</span></span>
+<span id="cb153-2"><a href="#cb153-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(estuary_metadata_clean, <span class="at">by =</span> <span class="fu">join_by</span>(site <span class="sc">==</span> site_name)) <span class="sc">|&gt;</span></span>
+<span id="cb153-3"><a href="#cb153-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(daily_sonde_summary, <span class="at">by =</span> <span class="fu">join_by</span>(site, date))</span>
+<span id="cb153-4"><a href="#cb153-4" aria-hidden="true" tabindex="-1"></a>full_merge_catch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 427 × 11
+   site       date       common_name   count scientific_name     lat   lon zone 
+   &lt;fct&gt;      &lt;date&gt;     &lt;fct&gt;         &lt;dbl&gt; &lt;fct&gt;             &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;
+ 1 lower_ross 2026-05-01 barramundi        6 Lates calcarifer  -19.3  147. Down…
+ 2 lower_ross 2026-05-01 mangrove_jack     3 Lutjanus argenti… -19.3  147. Down…
+ 3 lower_ross 2026-05-01 bream             4 Acanthopagrus sp… -19.3  147. Down…
+ 4 lower_ross 2026-05-01 flathead          2 Platycephalus sp… -19.3  147. Down…
+ 5 lower_ross 2026-05-02 barramundi        1 Lates calcarifer  -19.3  147. Down…
+ 6 lower_ross 2026-05-02 mangrove_jack     1 Lutjanus argenti… -19.3  147. Down…
+ 7 lower_ross 2026-05-02 bream             3 Acanthopagrus sp… -19.3  147. Down…
+ 8 lower_ross 2026-05-02 flathead          3 Platycephalus sp… -19.3  147. Down…
+ 9 lower_ross 2026-05-03 mangrove_jack     2 Lutjanus argenti… -19.3  147. Down…
+10 lower_ross 2026-05-03 flathead          3 Platycephalus sp… -19.3  147. Down…
+# ℹ 417 more rows
+# ℹ 3 more variables: mean_temperature &lt;dbl&gt;, mean_salinity &lt;dbl&gt;,
+#   mean_turbidity &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Phase 3: Zero data framework</p>
+<p>Use tidyr::complete() to build a zero-data framework. Ensure that every species is represented at every site, on every sampling day.</p>
+<ul>
+<li>Replace the resulting NA values in the catch column with 0 using coalesce().</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb155"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Force inclusion of hidden zero-catch data</span></span>
+<span id="cb155-2"><a href="#cb155-2" aria-hidden="true" tabindex="-1"></a>finalised_catch <span class="ot">&lt;-</span> full_merge_catch <span class="sc">|&gt;</span></span>
+<span id="cb155-3"><a href="#cb155-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(</span>
+<span id="cb155-4"><a href="#cb155-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">nesting</span>( site, date, </span>
+<span id="cb155-5"><a href="#cb155-5" aria-hidden="true" tabindex="-1"></a>            lat, lon, </span>
+<span id="cb155-6"><a href="#cb155-6" aria-hidden="true" tabindex="-1"></a>            zone, mean_temperature, mean_salinity, mean_turbidity),</span>
+<span id="cb155-7"><a href="#cb155-7" aria-hidden="true" tabindex="-1"></a>    scientific_name)<span class="sc">|&gt;</span></span>
+<span id="cb155-8"><a href="#cb155-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb155-9"><a href="#cb155-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert the resulting NA counts to 0</span></span>
+<span id="cb155-10"><a href="#cb155-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="fu">coalesce</span>(count, <span class="dv">0</span>)</span>
+<span id="cb155-11"><a href="#cb155-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb155-12"><a href="#cb155-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-13"><a href="#cb155-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(finalised_catch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 480 × 11
+   site       date         lat   lon zone       mean_temperature mean_salinity
+   &lt;fct&gt;      &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;                 &lt;dbl&gt;         &lt;dbl&gt;
+ 1 lower_ross 2026-05-01 -19.3  147. Downstream             23.8          28.4
+ 2 lower_ross 2026-05-01 -19.3  147. Downstream             23.8          28.4
+ 3 lower_ross 2026-05-01 -19.3  147. Downstream             23.8          28.4
+ 4 lower_ross 2026-05-01 -19.3  147. Downstream             23.8          28.4
+ 5 lower_ross 2026-05-02 -19.3  147. Downstream             24.0          27.7
+ 6 lower_ross 2026-05-02 -19.3  147. Downstream             24.0          27.7
+ 7 lower_ross 2026-05-02 -19.3  147. Downstream             24.0          27.7
+ 8 lower_ross 2026-05-02 -19.3  147. Downstream             24.0          27.7
+ 9 lower_ross 2026-05-03 -19.3  147. Downstream             24.2          28.1
+10 lower_ross 2026-05-03 -19.3  147. Downstream             24.2          28.1
+# ℹ 470 more rows
+# ℹ 4 more variables: mean_turbidity &lt;dbl&gt;, scientific_name &lt;fct&gt;,
+#   common_name &lt;fct&gt;, count &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb157"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="co">#prompt solution</span></span>
+<span id="cb157-2"><a href="#cb157-2" aria-hidden="true" tabindex="-1"></a><span class="co">#finalised_catch &lt;- full_merge_catch %&gt;%</span></span>
+<span id="cb157-3"><a href="#cb157-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  complete(</span></span>
+<span id="cb157-4"><a href="#cb157-4" aria-hidden="true" tabindex="-1"></a> <span class="co">#   site,</span></span>
+<span id="cb157-5"><a href="#cb157-5" aria-hidden="true" tabindex="-1"></a> <span class="co">#   date,</span></span>
+<span id="cb157-6"><a href="#cb157-6" aria-hidden="true" tabindex="-1"></a> <span class="co">#   scientific_name, # Use the comprehensive list of species</span></span>
+<span id="cb157-7"><a href="#cb157-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  fill = list(count = 0) # Fill the 'count' column with 0 for missing combinations</span></span>
+<span id="cb157-8"><a href="#cb157-8" aria-hidden="true" tabindex="-1"></a> <span class="co"># ) %&gt;%</span></span>
+<span id="cb157-9"><a href="#cb157-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For environmental columns (zone, mean_temp, mean_salinity, mean_turbidity)</span></span>
+<span id="cb157-10"><a href="#cb157-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># which are associated with 'site' and 'date', we want to propagate their values</span></span>
+<span id="cb157-11"><a href="#cb157-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># for newly created rows that share the same site and date.</span></span>
+<span id="cb157-12"><a href="#cb157-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># This assumes these environmental values are consistent for a given site-date.</span></span>
+<span id="cb157-13"><a href="#cb157-13" aria-hidden="true" tabindex="-1"></a> <span class="co"># group_by(site, date) %&gt;%</span></span>
+<span id="cb157-14"><a href="#cb157-14" aria-hidden="true" tabindex="-1"></a> <span class="co"># fill(zone, mean_temperature, mean_salinity, mean_turbidity, .direction = "downup") %&gt;%</span></span>
+<span id="cb157-15"><a href="#cb157-15" aria-hidden="true" tabindex="-1"></a> <span class="co"># ungroup() </span></span>
+<span id="cb157-16"><a href="#cb157-16" aria-hidden="true" tabindex="-1"></a><span class="co">#finalised_catch</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Phase 4: Statistical Extraction</strong> From your master dataset, generate a clean summary table showing the mean ± standard error of both the fish catch and the salinity for each scientific species across each estuary zone.</p>
+<p>Salinity summary table:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb158"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create a summary table showing the mean ± standard error of salinity for each estuary zone using the finalised_catch dataset</span></span>
+<span id="cb158-2"><a href="#cb158-2" aria-hidden="true" tabindex="-1"></a>salinity_summary_table <span class="ot">&lt;-</span> finalised_catch <span class="sc">|&gt;</span></span>
+<span id="cb158-3"><a href="#cb158-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(zone) <span class="sc">|&gt;</span></span>
+<span id="cb158-4"><a href="#cb158-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb158-5"><a href="#cb158-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_salinity =</span> <span class="fu">median</span>(mean_salinity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb158-6"><a href="#cb158-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">se_salinity =</span> <span class="fu">sd</span>(mean_salinity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
+<span id="cb158-7"><a href="#cb158-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb158-8"><a href="#cb158-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb158-9"><a href="#cb158-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(salinity_summary_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  zone       median_salinity se_salinity
+  &lt;fct&gt;                &lt;dbl&gt;       &lt;dbl&gt;
+1 Upstream              4.99     0.0172 
+2 Middle               15.0      0.0359 
+3 Downstream           28.0      0.0319 
+4 Marine               34.0      0.00940</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb160"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "This figure shows the Salinity Gradient across zones at the Ross River Estuary System at Townsville, NQ, Australia during May of 2026."</span></span>
+<span id="cb160-2"><a href="#cb160-2" aria-hidden="true" tabindex="-1"></a><span class="co">#create a bar graph showing the median salinity for each zone with error bars representing the standard error</span></span>
+<span id="cb160-3"><a href="#cb160-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salinity_summary_table, <span class="fu">aes</span>(<span class="at">x =</span> zone, <span class="at">y =</span> median_salinity)) <span class="sc">+</span></span>
+<span id="cb160-4"><a href="#cb160-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb160-5"><a href="#cb160-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> median_salinity <span class="sc">-</span> se_salinity, </span>
+<span id="cb160-6"><a href="#cb160-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymax =</span> median_salinity <span class="sc">+</span> se_salinity), </span>
+<span id="cb160-7"><a href="#cb160-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb160-8"><a href="#cb160-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Median Salinity by Estuary Zone"</span>,</span>
+<span id="cb160-9"><a href="#cb160-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Error bars represent standard error"</span>,</span>
+<span id="cb160-10"><a href="#cb160-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Median Salinity (ppt)"</span>,</span>
+<span id="cb160-11"><a href="#cb160-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Estuary Zone"</span>) <span class="sc">+</span></span>
+<span id="cb160-12"><a href="#cb160-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Workshop2_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Turbidity summary table:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb161"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create a summary table showing the mean ± standard error of turbidity for each estuary zone using the finalised_catch dataset</span></span>
+<span id="cb161-2"><a href="#cb161-2" aria-hidden="true" tabindex="-1"></a>turbidity_summary_table <span class="ot">&lt;-</span> finalised_catch <span class="sc">|&gt;</span></span>
+<span id="cb161-3"><a href="#cb161-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(zone) <span class="sc">|&gt;</span></span>
+<span id="cb161-4"><a href="#cb161-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb161-5"><a href="#cb161-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_turbidity =</span> <span class="fu">median</span>(mean_turbidity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb161-6"><a href="#cb161-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">se_turbidity =</span> <span class="fu">sd</span>(mean_turbidity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
+<span id="cb161-7"><a href="#cb161-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb161-8"><a href="#cb161-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb161-9"><a href="#cb161-9" aria-hidden="true" tabindex="-1"></a>turbidity_summary_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  zone       median_turbidity se_turbidity
+  &lt;fct&gt;                 &lt;dbl&gt;        &lt;dbl&gt;
+1 Upstream               25.2        0.148
+2 Middle                 25.7        0.114
+3 Downstream             25.2        0.150
+4 Marine                 25.5        0.116</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create a bar graph showing the median turbidity for each zone with error bars representing the standard error</span></span>
+<span id="cb163-2"><a href="#cb163-2" aria-hidden="true" tabindex="-1"></a>turbidity_summary_table<span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> zone, <span class="at">y =</span> median_turbidity)) <span class="sc">+</span></span>
+<span id="cb163-3"><a href="#cb163-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb163-4"><a href="#cb163-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> median_turbidity <span class="sc">-</span> se_turbidity, </span>
+<span id="cb163-5"><a href="#cb163-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymax =</span> median_turbidity <span class="sc">+</span> se_turbidity), </span>
+<span id="cb163-6"><a href="#cb163-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb163-7"><a href="#cb163-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Median Turbidity by Estuary Zone"</span>,</span>
+<span id="cb163-8"><a href="#cb163-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Error bars represent standard error"</span>,</span>
+<span id="cb163-9"><a href="#cb163-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Median Turbidity (NTU)"</span>,</span>
+<span id="cb163-10"><a href="#cb163-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Estuary Zone"</span>) <span class="sc">+</span></span>
+<span id="cb163-11"><a href="#cb163-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Workshop2_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Temperature summary table:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb164"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb164-1"><a href="#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create a summary table showing the mean ± standard error of temperature for each estuary zone using the finalised_catch dataset</span></span>
+<span id="cb164-2"><a href="#cb164-2" aria-hidden="true" tabindex="-1"></a>temp_summary_table <span class="ot">&lt;-</span> finalised_catch <span class="sc">|&gt;</span></span>
+<span id="cb164-3"><a href="#cb164-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(zone) <span class="sc">|&gt;</span></span>
+<span id="cb164-4"><a href="#cb164-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb164-5"><a href="#cb164-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_temperature =</span> <span class="fu">median</span>(mean_temperature, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb164-6"><a href="#cb164-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">se_temperature =</span> <span class="fu">sd</span>(mean_temperature, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
+<span id="cb164-7"><a href="#cb164-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb164-8"><a href="#cb164-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb164-9"><a href="#cb164-9" aria-hidden="true" tabindex="-1"></a>temp_summary_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  zone       median_temperature se_temperature
+  &lt;fct&gt;                   &lt;dbl&gt;          &lt;dbl&gt;
+1 Upstream                 24.0         0.0128
+2 Middle                   24.0         0.0118
+3 Downstream               24.0         0.0115
+4 Marine                   24.0         0.0156</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb166"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb166-1"><a href="#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create a bar graph showing the median temperature for each zone with error bars representing the standard error</span></span>
+<span id="cb166-2"><a href="#cb166-2" aria-hidden="true" tabindex="-1"></a>temp_summary_table<span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> zone, <span class="at">y =</span> median_temperature)) <span class="sc">+</span></span>
+<span id="cb166-3"><a href="#cb166-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb166-4"><a href="#cb166-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> median_temperature <span class="sc">-</span> se_temperature, </span>
+<span id="cb166-5"><a href="#cb166-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymax =</span> median_temperature <span class="sc">+</span> se_temperature), </span>
+<span id="cb166-6"><a href="#cb166-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb166-7"><a href="#cb166-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Median Temperature by Estuary Zone"</span>,</span>
+<span id="cb166-8"><a href="#cb166-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Error bars represent standard error"</span>,</span>
+<span id="cb166-9"><a href="#cb166-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Median Temperature (°C)"</span>,</span>
+<span id="cb166-10"><a href="#cb166-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Estuary Zone"</span>) <span class="sc">+</span></span>
+<span id="cb166-11"><a href="#cb166-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Workshop2_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This is my attempt to plot fish abundance while also visualising salinity differences on the same plot as there are notable differences between the salinities at each estuary zone:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create a summary table for fish catch showing the mean ± standard error of fish catch for each scientific species across each estuary zone using the finalised_catch dataset</span></span>
+<span id="cb167-2"><a href="#cb167-2" aria-hidden="true" tabindex="-1"></a>fish_summary_table <span class="ot">&lt;-</span> finalised_catch <span class="sc">|&gt;</span></span>
+<span id="cb167-3"><a href="#cb167-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(scientific_name, zone) <span class="sc">|&gt;</span></span>
+<span id="cb167-4"><a href="#cb167-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb167-5"><a href="#cb167-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_count =</span> <span class="fu">mean</span>(count, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb167-6"><a href="#cb167-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">se_count =</span> <span class="fu">sd</span>(count, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
+<span id="cb167-7"><a href="#cb167-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb167-8"><a href="#cb167-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb167-9"><a href="#cb167-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fish_summary_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 4
+   scientific_name           zone       mean_count se_count
+   &lt;fct&gt;                     &lt;fct&gt;           &lt;dbl&gt;    &lt;dbl&gt;
+ 1 Lates calcarifer          Upstream         4.8     0.309
+ 2 Lates calcarifer          Middle           2.2     0.242
+ 3 Lates calcarifer          Downstream       1.6     0.256
+ 4 Lates calcarifer          Marine           1.57    0.248
+ 5 Lutjanus argentimaculatus Upstream         1.9     0.211
+ 6 Lutjanus argentimaculatus Middle           1.97    0.206
+ 7 Lutjanus argentimaculatus Downstream       2       0.299
+ 8 Lutjanus argentimaculatus Marine           1.5     0.208
+ 9 Acanthopagrus spp.        Upstream         2.57    0.302
+10 Acanthopagrus spp.        Middle           2.23    0.286
+11 Acanthopagrus spp.        Downstream       2       0.275
+12 Acanthopagrus spp.        Marine           2.33    0.344
+13 Platycephalus spp.        Upstream         2.3     0.333
+14 Platycephalus spp.        Middle           1.97    0.265
+15 Platycephalus spp.        Downstream       2.1     0.175
+16 Platycephalus spp.        Marine           5.67    0.237</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb169"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="co">#my plot attempt</span></span>
+<span id="cb169-2"><a href="#cb169-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb169-3"><a href="#cb169-3" aria-hidden="true" tabindex="-1"></a><span class="co">#plot mean fish count as a line graph for each scientific species across each estuary zone with error bars representing the standard error</span></span>
+<span id="cb169-4"><a href="#cb169-4" aria-hidden="true" tabindex="-1"></a><span class="co">#faceted by species</span></span>
+<span id="cb169-5"><a href="#cb169-5" aria-hidden="true" tabindex="-1"></a><span class="co">#The plot will have jittered data points for count from the finalised_catch dataset</span></span>
+<span id="cb169-6"><a href="#cb169-6" aria-hidden="true" tabindex="-1"></a><span class="co"># points to be coloured by zone and sized by mean salinity. </span></span>
+<span id="cb169-7"><a href="#cb169-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fish_summary_table, <span class="fu">aes</span>(<span class="at">x =</span> zone, <span class="at">y =</span> mean_count, <span class="at">fill=</span> zone, <span class="at">group =</span> scientific_name)) <span class="sc">+</span></span>
+<span id="cb169-8"><a href="#cb169-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb169-9"><a href="#cb169-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> finalised_catch, <span class="fu">aes</span>(<span class="at">x =</span> zone, <span class="at">y =</span> count, <span class="at">colour =</span> zone, <span class="at">size =</span> mean_salinity), <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">pch =</span> <span class="dv">23</span>) <span class="sc">+</span></span>
+<span id="cb169-10"><a href="#cb169-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_count <span class="sc">-</span> se_count, <span class="at">ymax =</span> mean_count <span class="sc">+</span> se_count), <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb169-11"><a href="#cb169-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> scientific_name) <span class="sc">+</span></span>
+<span id="cb169-12"><a href="#cb169-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Predatory Fish Abundance across Estuarine Salinity Gradients"</span>,</span>
+<span id="cb169-13"><a href="#cb169-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Ross River Estuary System, May 2026"</span>,</span>
+<span id="cb169-14"><a href="#cb169-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Abundance (per day)"</span>,</span>
+<span id="cb169-15"><a href="#cb169-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Spatial Zone"</span>) <span class="sc">+</span></span>
+<span id="cb169-16"><a href="#cb169-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb169-17"><a href="#cb169-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Width not defined
+ℹ Set with `position_dodge(width = ...)`</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Workshop2_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Based on lecturer plot instructions this is what the plot would look like:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb171"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb171-1"><a href="#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="co">#based off bens plot</span></span>
+<span id="cb171-2"><a href="#cb171-2" aria-hidden="true" tabindex="-1"></a>fish_summary_table <span class="sc">|&gt;</span> </span>
+<span id="cb171-3"><a href="#cb171-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> zone, <span class="at">y =</span> mean_count, <span class="at">fill =</span> zone)) <span class="sc">+</span></span>
+<span id="cb171-4"><a href="#cb171-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">group =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb171-5"><a href="#cb171-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add in points from master data</span></span>
+<span id="cb171-6"><a href="#cb171-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> finalised_catch, <span class="fu">aes</span>(<span class="at">x =</span> zone, <span class="at">y =</span> count), </span>
+<span id="cb171-7"><a href="#cb171-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>), <span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb171-8"><a href="#cb171-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">pch =</span> <span class="dv">23</span>) <span class="sc">+</span></span>
+<span id="cb171-9"><a href="#cb171-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb171-10"><a href="#cb171-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_count <span class="sc">-</span> se_count, <span class="at">ymax =</span> mean_count <span class="sc">+</span> se_count), </span>
+<span id="cb171-11"><a href="#cb171-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.9</span>), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb171-12"><a href="#cb171-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb171-13"><a href="#cb171-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> scientific_name, <span class="at">scales =</span> <span class="st">"fixed"</span>) <span class="sc">+</span></span>
+<span id="cb171-14"><a href="#cb171-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb171-15"><a href="#cb171-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb171-16"><a href="#cb171-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"italic"</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">colour =</span> <span class="st">"grey20"</span>),</span>
+<span id="cb171-17"><a href="#cb171-17" aria-hidden="true" tabindex="-1"></a>   <span class="co"># legend.position = "bottom"</span></span>
+<span id="cb171-18"><a href="#cb171-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span></span>
+<span id="cb171-19"><a href="#cb171-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb171-20"><a href="#cb171-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb171-21"><a href="#cb171-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">#title = "Predatory Fish Abundance across Estuarine Salinity Gradients",</span></span>
+<span id="cb171-22"><a href="#cb171-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">#subtitle = "Ross River Estuary System, May 2026",</span></span>
+<span id="cb171-23"><a href="#cb171-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Spatial Zone"</span>,</span>
+<span id="cb171-24"><a href="#cb171-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Abundance (per day)"</span>,</span>
+<span id="cb171-25"><a href="#cb171-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Spatial Zone"</span></span>
+<span id="cb171-26"><a href="#cb171-26" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Width not defined
+ℹ Set with `position_dodge(width = ...)`</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Workshop2_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
