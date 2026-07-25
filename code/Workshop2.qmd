@@ -5,10 +5,6 @@ format: html
 editor: visual
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
 ## 2.2 Tidying data
 
 Loading tidyverse
@@ -804,7 +800,7 @@ temp_summary_table|> ggplot(aes(x = zone, y = median_temperature)) +
   theme_minimal()
 ```
 
-This is my attempt to plot fish abundance with salinity as there are notable differences between the salinities at each estuary zone:
+This is my attempt to plot fish abundance while also visualising salinity differences on the same plot as there are notable differences between the salinities at each estuary zone:
 
 ```{r}
 #create a summary table for fish catch showing the mean ± standard error of fish catch for each scientific species across each estuary zone using the finalised_catch dataset
@@ -819,7 +815,10 @@ print(fish_summary_table)
 
 #my plot attempt
 
-#plot mean fish count as a line graph for each scientific species across each estuary zone with error bars representing the standard error, faceted by species. The plot will also include jittered data points for count from the finalised_catch dataset, with points coloured by zone and sized by mean salinity. The lines, points and error bars for mean_count will be rendered in black to ensure they are visible against the coloured points representing the raw data.
+#plot mean fish count as a line graph for each scientific species across each estuary zone with error bars representing the standard error
+#faceted by species
+#The plot will have jittered data points for count from the finalised_catch dataset
+# points to be coloured by zone and sized by mean salinity. 
 ggplot(fish_summary_table, aes(x = zone, y = mean_count, fill= zone, group = scientific_name)) +
   geom_line(color = "black") +
   geom_point(data = finalised_catch, aes(x = zone, y = count, colour = zone, size = mean_salinity), position = position_jitter(width = 0.2), alpha = 0.2) + geom_point(position = "dodge", size = 4, pch = 23) +
