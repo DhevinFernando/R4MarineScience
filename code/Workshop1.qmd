@@ -1,6 +1,6 @@
 ---
 title: "R for Marine Science Workshop 1"
-author: "Your name here"
+author: "Dhevin Fernando"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
  html_document:
@@ -21,7 +21,7 @@ editor_options:
 ```{r setup, include=FALSE}
 # Set options, housekeeping
 knitr::opts_chunk$set(
-	echo = FALSE,
+	echo = TRUE,
 	include = TRUE,
 	message = FALSE,
 	warning = FALSE)
@@ -42,7 +42,7 @@ objects()
 ```{r packages, message=FALSE, warning=FALSE, include=FALSE}
 
 #Install here()
-install.packages("here")
+#install.packages("here")
 # Load the primary data science framework and Excel import library
 library(tidyverse)
 library(readxl)
@@ -65,7 +65,7 @@ mangrove_data <- read_csv(file = here::here("data/mangrove_survey_raw.csv"))
 ### Source script
 
 ```{r source-script1, message=FALSE, warning=FALSE, include=FALSE}
-source("Workshop1.R")
+#source("Workshop1.R")
 ```
 
 **Correcting imported data**
